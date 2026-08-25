@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Aptronix Customer Intelligence — Phase 2</title>
+<title>Aptronix Customer Intelligence — Verified Aggregate Build</title>
 <style>
 :root{--bg:#f5f2ed;--panel:#fffdfa;--ink:#1d1b18;--muted:#706a63;--line:#e4ddd3;--dark:#211f1c;--accent:#b45b2a;--soft:#f7ece4;--green:#3d6b52;--shadow:0 10px 30px rgba(32,28,24,.06)}
 *{box-sizing:border-box}body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink)}button,input,select{font:inherit}
@@ -23,6 +23,7 @@
 .action{display:grid;grid-template-columns:1.05fr .95fr;gap:9px;margin-top:11px}.next,.why{border-radius:13px;padding:12px}.next{background:var(--soft);border:1px solid #dec4b1}.why{border:1px solid var(--line)}.why ul{font-size:9.5px;color:var(--muted);padding-left:17px;line-height:1.5}
 .behFilters{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;max-width:780px}.behKpis{display:grid;grid-template-columns:repeat(6,1fr);gap:9px;margin-top:12px}.barrow{display:grid;grid-template-columns:115px 1fr 70px;gap:8px;align-items:center;margin-top:9px;font-size:10px}.track{height:8px;background:#eee7df;border-radius:99px;overflow:hidden}.fill{height:100%;background:var(--accent)}.choiceGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
 .note{font-size:9.5px;line-height:1.5;color:var(--muted);border:1px dashed #d7cfc5;background:#fbfaf8;border-radius:12px;padding:11px;margin-top:12px}.meaning{margin-top:9px;padding:10px 11px;border-radius:11px;background:#f5efe8;border:1px solid #e3d6c9;font-size:10px;line-height:1.5}.meaning b{font-size:10px}.heroFinding{margin-top:12px;padding:13px 14px;border-radius:13px;background:#28241f;color:#fff;font-size:11px;line-height:1.5}.heroFinding b{color:#f0b88f}
+.channelbar{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin:12px 0}.chbtn{padding:10px;border:1px solid var(--line);background:#fff;border-radius:11px;font-size:10px;font-weight:750;cursor:pointer}.chbtn.active{background:#28241f;color:#fff;border-color:#28241f}.segwarn{font-size:9.5px;line-height:1.5;color:#7b5b42;border:1px solid #dfc9b7;background:#fff8f1;border-radius:12px;padding:11px;margin-top:12px}.mobileNav{display:none}.mobileBack{display:none}
 @media(max-width:1100px){.app{grid-template-columns:80px 1fr}.brand,.privacy,.nav span{display:none}.nav button{text-align:center}.kpis,.behKpis{grid-template-columns:repeat(3,1fr)}.grid2,.choiceGrid{grid-template-columns:1fr}.explorer{grid-template-columns:340px 1fr}}
 @media(max-width:800px){
 html{scroll-behavior:smooth}
@@ -85,24 +86,22 @@ h1{font-size:23px;line-height:1.08;margin-top:4px}
 #marketing .kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
 #downloadMarketing{min-height:46px}
 }
-.channelbar{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin:12px 0}.chbtn{padding:10px;border:1px solid var(--line);background:#fff;border-radius:11px;font-size:10px;font-weight:750;cursor:pointer}.chbtn.active{background:#28241f;color:#fff;border-color:#28241f}.segwarn{font-size:9.5px;line-height:1.5;color:#7b5b42;border:1px solid #dfc9b7;background:#fff8f1;border-radius:12px;padding:11px;margin-top:12px}.mobileNav{display:none}.mobileBack{display:none}
 .lgLoading{padding:22px;text-align:center;color:var(--muted);font-size:11px}.lgError{padding:16px;border:1px solid #e0b7aa;background:#fff4ef;color:#7c3c2b;border-radius:12px;font-size:10px}
 </style>
 </head>
 <body><div class="app">
-<aside><div class="brand">Customer Intelligence<small>Aptronix • Phase 2</small></div>
-<div class="nav"><button class="active" data-view="overview"><span>Business Overview</span></button><button data-view="explorer"><span>Customer Explorer</span></button><button data-view="behaviour"><span>Customer Choice Intelligence</span></button><button data-view="marketing"><span>Action / Marketing Export</span></button><button data-view="history"><span>LifeGraph Intelligence</span></button></div>
-<div class="privacy">Contains customer names from posted sales. Keep this build private / access-controlled.</div></aside>
+<aside><div class="brand">Customer Intelligence<small>Aptronix • Verified aggregate build</small></div>
+<div class="nav"><button class="active" data-view="overview"><span>Business Overview</span></button><button data-view="behaviour"><span>Customer Choice Intelligence</span></button><button data-view="history"><span>LifeGraph Intelligence</span></button></div>
+<div class="privacy">Public aggregate-only build. No customer names, customer codes or contact details are included.</div></aside>
 <main><div class="top"><div id="crumb">Business Overview</div><div class="pill">AUDITED 2024–2025 LIFEGRAPH</div></div>
 <div class="mobileNav" id="mobileNav">
   <button class="active" data-view="overview">Overview</button>
-  <button data-view="explorer">Customers</button>
   <button data-view="behaviour">Choice Intelligence</button>
-  <button data-view="marketing">Marketing Export</button><button data-view="history">LifeGraph 2024–25</button>
+  <button data-view="history">LifeGraph 2024–25</button>
 </div>
 <div class="content">
 
-<section class="view active" id="overview"><div class="hero"><div class="eyebrow">Customer LifeGraph</div><h1>Business Overview</h1><p>Retail Stores, E-commerce, Warehouse, SMB, Corporate and Online Executive are now viewed separately. Select a channel to see its customer relationship metrics instead of one blended business number.</p></div><div class="channelbar" id="overviewChannels"></div><div class="heroFinding"><b>Data audit applied:</b> 69,926 repeated valid transaction-line rows were removed before customer calculations, affecting 25,090 customer IDs and correcting approximately <b>₹183.00 Cr</b> of duplicated net value. Bills are counted as distinct invoice numbers, while units are counted separately.</div><div class="kpis" id="overviewKpis"></div><div class="heroFinding" id="overviewRead"></div><div class="grid2"><div class="card"><h2>What this channel is telling us</h2><div class="insights" id="overviewInsights"></div></div><div class="card"><h2>Possible next-category pools</h2><div id="gapBars"></div></div></div><div class="card" style="margin-top:12px"><h2>Store / selling-point relationship quality</h2><div class="desc">Complete list for the selected channel — no top-store truncation.</div><div style="max-height:760px;overflow:auto;margin-top:8px"><table class="table"><thead><tr><th>Store / point</th><th>Customers</th><th>Repeat %</th><th>Multi-cat %</th><th>Worth reviewing</th><th>Net value</th></tr></thead><tbody id="storeTable"></tbody></table></div></div><div class="card" style="margin-top:12px"><h2>Channel comparison</h2><div style="overflow:auto;-webkit-overflow-scrolling:touch"><table class="table"><thead><tr><th>Channel</th><th>Customers</th><th>Repeat %</th><th>Multi-cat %</th><th>One-bill</th><th>Net customer value</th></tr></thead><tbody id="channelTable"></tbody></table></div></div><div class="note"><b>Segregation rule:</b> Warehouse → SMB → Corporate → E-commerce → Online Executive → Retail Stores. Retail is therefore the residual customer channel after non-retail relationship types are removed.</div></section>
+<section class="view active" id="overview"><div class="hero"><div class="eyebrow">Customer LifeGraph</div><h1>Business Overview</h1><p>Retail Stores, E-commerce, Warehouse, SMB, Corporate and Online Executive are viewed separately. Select a channel to see its customer relationship metrics instead of one blended business number.</p></div><div class="channelbar" id="overviewChannels"></div><div class="heroFinding" id="auditFinding"></div><div class="kpis" id="overviewKpis"></div><div class="heroFinding" id="overviewRead"></div><div class="grid2"><div class="card"><h2>What this channel is telling us</h2><div class="insights" id="overviewInsights"></div></div><div class="card"><h2>Possible next-category pools</h2><div id="gapBars"></div></div></div><div class="card" style="margin-top:12px"><h2>Store / selling-point relationship quality</h2><div class="desc">Complete list for the selected channel — no top-store truncation.</div><div style="max-height:760px;overflow:auto;margin-top:8px"><table class="table"><thead><tr><th>Store / point</th><th>Customers</th><th>Repeat %</th><th>Multi-cat %</th><th>Priority pool</th><th>Net value</th></tr></thead><tbody id="storeTable"></tbody></table></div></div><div class="card" style="margin-top:12px"><h2>Channel comparison</h2><div style="overflow:auto;-webkit-overflow-scrolling:touch"><table class="table"><thead><tr><th>Channel</th><th>Customers</th><th>Repeat %</th><th>Multi-cat %</th><th>One-bill</th><th>Net customer value</th></tr></thead><tbody id="channelTable"></tbody></table></div></div><div class="note"><b>Segregation rule:</b> Warehouse → SMB → Corporate → E-commerce → Online Executive → Retail Stores. Each customer belongs to one channel; Retail is the residual after the other relationship types are assigned.</div></section>
 <section class="view" id="explorer">
 <div class="hero"><div class="eyebrow">Customer 360</div><h1>Customer Explorer</h1><p>Search the full identifiable customer population or select a store. Each customer card now explains <b>what we know, what it means, why the customer may be worth reviewing now, and the most sensible next conversation</b>. Customer name comes from posted sales; mobile and email are not present in this source and are therefore not invented.</p></div>
 <div class="explorer"><div class="card queue"><div class="filters"><input id="search" placeholder="Search customer name or code"><select id="channelFilter"></select><select id="storeFilter"></select><div class="two"><select id="typeFilter"><option value="all">All customers</option><option value="repeat">Repeat customers</option><option value="multi">Multi-category customers</option><option value="high">Customers worth reviewing</option><option value="one">One-bill customers</option></select><select id="sortFilter"><option value="priority">Sort: Review relevance</option><option value="value">Sort: Value</option><option value="name">Sort: Name</option></select></div><div class="qmeta" id="qstats"></div></div><div class="qlist" id="list"></div></div><div class="card profile"><div id="profile"></div></div></div>
@@ -209,23 +208,23 @@ h1{font-size:23px;line-height:1.08;margin-top:4px}
 </div>
 
 <div class="kpis">
-  <div class="kpi"><span>2-year distinct Customer Codes</span><b>560,679</b><small>279,159 in 2024 + 315,757 in 2025 less exact overlap</small></div>
-  <div class="kpi"><span>Confirmed cross-year relationships</span><b>34,237</b><small>Same Customer Code appears in both years</small></div>
-  <div class="kpi"><span>2024 codes seen again in 2025</span><b>12.3%</b><small>34,237 of 279,159 audited 2024 Customer Codes</small></div>
-  <div class="kpi"><span>2025 codes with prior-year match</span><b>10.8%</b><small>34,237 of 315,757 audited 2025 Customer Codes</small></div>
-  <div class="kpi"><span>2024 codes not seen in 2025</span><b>244,922</b><small>Potential reactivation pool after identity/contact validation</small></div>
-  <div class="kpi"><span>2025 codes first seen in history</span><b>281,520</b><small>First seen by Customer Code; not automatically a new person</small></div>
+  <div class="kpi"><span>2-year distinct Customer Codes</span><b>560,681</b><small>279,159 in 2024 + 315,757 in 2025 less exact overlap</small></div>
+  <div class="kpi"><span>Confirmed cross-year relationships</span><b>34,235</b><small>Same Customer Code appears in both years</small></div>
+  <div class="kpi"><span>2024 codes seen again in 2025</span><b>12.3%</b><small>34,235 of 279,159 audited 2024 Customer Codes</small></div>
+  <div class="kpi"><span>2025 codes with prior-year match</span><b>10.8%</b><small>34,235 of 315,757 audited 2025 Customer Codes</small></div>
+  <div class="kpi"><span>2024 codes not seen in 2025</span><b>244,924</b><small>Potential reactivation pool after identity/contact validation</small></div>
+  <div class="kpi"><span>2025 codes first seen in history</span><b>281,522</b><small>First seen by Customer Code; not automatically a new person</small></div>
 </div>
 
-<div class="heroFinding"><b>Executive read:</b> Exact Customer Code continuity across 2024→2025 is <b>34,237 customers</b>. That is a meaningful confirmed repeat base, but the much larger unmatched populations should not be called “new” or “churned” until mobile/email lets us identify customers whose Customer Code may have changed. The biggest immediate opportunity is to use the matched population for lifetime-value and ecosystem analysis, while preparing the 244,922 2024-only codes as a reactivation pool once contact identity is available.</div>
+<div class="heroFinding"><b>Executive read:</b> Exact Customer Code continuity across 2024→2025 is <b>34,235 customers</b>. That is a meaningful confirmed repeat base, but the much larger unmatched populations should not be called “new” or “churned” until a stable identity field lets us identify customers whose Customer Code may have changed. Use the matched population for lifetime-value and ecosystem analysis; treat the 244,924 2024-only codes as a candidate pool pending identity validation.</div>
 
 <div class="grid2">
   <div class="card">
     <h2>Confirmed relationship continuity</h2>
     <div class="desc">Customers whose exact Customer Code appears in both audited years.</div>
     <div class="insights">
-      <div class="insight"><b>34,237 confirmed two-year relationships.</b> These customers can safely be treated as returning across years at Customer Code level.</div>
-      <div class="insight"><b>99.99% normalized-name consistency.</b> 34,233 of 34,237 overlapping codes have matching customer names; the remaining four have unavailable later-year names rather than conflicting identities.</div>
+      <div class="insight"><b>34,235 confirmed two-year relationships.</b> These customers can safely be treated as returning across years at Customer Code level.</div>
+      <div class="insight"><b>100% normalized-name consistency.</b> All 34,235 overlapping codes have matching normalized customer names in the audited sources.</div>
       <div class="insight"><b>Best use:</b> lifetime value, multi-year bill frequency, category progression and upgrade-cycle analysis.</div>
     </div>
   </div>
@@ -234,7 +233,7 @@ h1{font-size:23px;line-height:1.08;margin-top:4px}
     <h2>Reactivation opportunity pool</h2>
     <div class="desc">Customer Codes present in audited 2024 history but not visible under the same code in 2025.</div>
     <div class="insights">
-      <div class="insight"><b>244,922 2024 Customer Codes are not seen again in 2025 under the same code.</b></div>
+      <div class="insight"><b>244,924 2024 Customer Codes are not seen again in 2025 under the same code.</b></div>
       <div class="insight"><b>Do not label this as churn yet.</b> Some customers may have received a different Customer Code later.</div>
       <div class="insight"><b>Best use after contact-data join:</b> identify genuinely dormant customers, rank by historical value/category, and create re-invitation campaigns.</div>
     </div>
@@ -246,7 +245,7 @@ h1{font-size:23px;line-height:1.08;margin-top:4px}
     <h2>First seen in available history</h2>
     <div class="desc">Customer Codes visible in 2025 without an exact-code match in 2024.</div>
     <div class="insights">
-      <div class="insight"><b>281,520 Customer Codes are first seen in the available 2024–2025 code history during 2025.</b></div>
+      <div class="insight"><b>281,522 Customer Codes are first seen in the available 2024–2025 code history during 2025.</b></div>
       <div class="insight"><b>This is not the same as “new customer.”</b> Until mobile/email is available, a changed Customer Code could make an existing person appear new.</div>
       <div class="insight"><b>Best use:</b> treat as first-seen relationships for current-period engagement while keeping identity confidence explicit.</div>
     </div>
@@ -267,14 +266,14 @@ h1{font-size:23px;line-height:1.08;margin-top:4px}
   <div class="desc" style="margin-top:10px">Audit information is kept here for control and traceability rather than taking over the business view.</div>
   <div style="overflow:auto;margin-top:8px">
     <table class="table"><thead><tr><th>Audit check</th><th>2024 result</th></tr></thead><tbody>
-      <tr><td>Valid de-duplicated transaction rows</td><td>745,908</td></tr>
-      <tr><td>POS rows</td><td>742,482</td></tr>
-      <tr><td>Return rows</td><td>3,426</td></tr>
-      <tr><td>Duplicate rows removed</td><td>22,904</td></tr>
+      <tr><td>Valid de-duplicated transaction rows</td><td>768,762</td></tr>
+      <tr><td>POS rows</td><td>765,317</td></tr>
+      <tr><td>Return rows</td><td>3,445</td></tr>
+      <tr><td>Exact duplicate rows removed</td><td>50</td></tr>
       <tr><td>Cancelled rows excluded</td><td>211</td></tr>
       <tr><td>Distinct valid sales invoices</td><td>368,717</td></tr>
       <tr><td>Identifiable Customer Codes</td><td>279,159</td></tr>
-      <tr><td>Audited net customer-linked value</td><td>₹1,384.32 Cr</td></tr>
+      <tr><td>Audited net customer-linked value</td><td>₹1,510.06 Cr</td></tr>
     </tbody></table>
   </div>
 </details>
@@ -284,7 +283,7 @@ h1{font-size:23px;line-height:1.08;margin-top:4px}
 
 
 </div></main></div>
-<script src="data/summary.js"></script><script src="data/behavior.js"></script><script src="data/history_summary.js"></script>
+<script src="data/summary.js?v=20260825-1"></script><script src="data/behavior.js?v=20260825-1"></script><script src="data/history_summary.js?v=20260825-1"></script>
 <script>
 const S=window.LG_SUMMARY,B=window.LG_BEHAVIOR||[],CHANNELS=S.channels,CORE=['iPhone','Mac','iPad','Watch','AirPods'];
 const money=n=>new Intl.NumberFormat('en-IN',{maximumFractionDigits:0}).format(n||0);
@@ -299,7 +298,7 @@ document.querySelectorAll('.nav button,.mobileNav button').forEach(b=>b.onclick=
 // Overview
 let activeOverview='Retail Stores';
 function renderOverviewChannels(){document.getElementById('overviewChannels').innerHTML=CHANNELS.map(c=>`<button class="chbtn ${c===activeOverview?'active':''}" onclick="activeOverview='${c}';renderOverviewChannels();renderOverview()">${c}</button>`).join('')}
-function renderOverview(){const m=S.channel_metrics[activeOverview]||{customers:0,repeat_pct:0,multi_pct:0,one:0,high:0,value:0,avg:0,gaps:[]};document.getElementById('overviewKpis').innerHTML=`<div class="kpi"><span>Identifiable customers</span><b>${money(m.customers)}</b><small>${activeOverview} customer base</small></div><div class="kpi"><span>Repeat customers</span><b>${m.repeat_pct.toFixed(1)}%</b><small>${money(m.repeat)} customers</small></div><div class="kpi"><span>Multi-category</span><b>${m.multi_pct.toFixed(1)}%</b><small>${money(m.multi)} customers</small></div><div class="kpi"><span>One-bill customers</span><b>${money(m.one)}</b><small>Relationship-development pool</small></div><div class="kpi"><span>Worth reviewing</span><b>${money(m.high)}</b><small>Review score ≥60</small></div><div class="kpi"><span>Net customer value</span><b>₹${(m.value/1e7).toFixed(1)} Cr</b><small>Audited mapped history</small></div>`;document.getElementById('overviewRead').innerHTML=`<b>${activeOverview} read:</b> Repeat rate is <b>${m.repeat_pct.toFixed(1)}%</b>, multi-category penetration is <b>${m.multi_pct.toFixed(1)}%</b>, and average mapped customer value is <b>₹${money(m.avg)}</b>.`;document.getElementById('overviewInsights').innerHTML=`<div class="insight"><b>${money(m.one)} one-bill customers</b> represent the largest re-engagement pool in this channel.</div><div class="insight"><b>${money(m.high)} customers</b> meet the current review threshold based on audited purchase-history signals.</div>`;const gm=Math.max(1,...m.gaps.map(x=>x[1]));document.getElementById('gapBars').innerHTML=m.gaps.map(x=>`<div class="barrow"><b>${x[0]}</b><div class="track"><div class="fill" style="width:${x[1]/gm*100}%"></div></div><span>${money(x[1])}</span></div>`).join('');const sm=S.store_metrics[activeOverview]||{};const rows=Object.entries(sm).map(([store,v])=>({store,...v})).sort((a,b)=>b.customers-a.customers);document.getElementById('storeTable').innerHTML=rows.map(x=>`<tr><td>${x.store}</td><td>${money(x.customers)}</td><td>${x.repeat_pct.toFixed(1)}%</td><td>${x.multi_pct.toFixed(1)}%</td><td>${money(x.high)}</td><td>₹${money(x.value)}</td></tr>`).join('');document.getElementById('channelTable').innerHTML=CHANNELS.map(c=>{const x=S.channel_metrics[c];return`<tr><td>${c}</td><td>${money(x.customers)}</td><td>${x.repeat_pct.toFixed(1)}%</td><td>${x.multi_pct.toFixed(1)}%</td><td>${money(x.one)}</td><td>₹${money(x.value)}</td></tr>`}).join('')}
+function renderOverview(){const m=S.channel_metrics[activeOverview]||{customers:0,repeat_pct:0,multi_pct:0,one:0,high:0,value:0,avg:0,gaps:[]};const meta=S.meta||{};document.getElementById('auditFinding').innerHTML=`<b>Source audit applied:</b> ${money(meta.exact_duplicate_rows_removed)} exact duplicate transaction lines were removed after excluding ${money(meta.cancelled_rows_excluded)} cancelled rows. This affected ${money(meta.duplicate_customer_codes_affected)} customer codes and removed ₹${((meta.duplicate_value_removed||0)/1e7).toFixed(2)} Cr of duplicated value. Bills are distinct invoice numbers; units remain separate.`;document.getElementById('overviewKpis').innerHTML=`<div class="kpi"><span>Identifiable customers</span><b>${money(m.customers)}</b><small>${activeOverview} customer base</small></div><div class="kpi"><span>Repeat customers</span><b>${m.repeat_pct.toFixed(1)}%</b><small>${money(m.repeat)} customers</small></div><div class="kpi"><span>Multi-category</span><b>${m.multi_pct.toFixed(1)}%</b><small>${money(m.multi)} customers</small></div><div class="kpi"><span>One-bill customers</span><b>${money(m.one)}</b><small>Relationship-development pool</small></div><div class="kpi"><span>Priority relationship pool</span><b>${money(m.high)}</b><small>3+ bills, 2+ core categories, or value ≥ ₹1.5L</small></div><div class="kpi"><span>Net customer value</span><b>₹${(m.value/1e7).toFixed(1)} Cr</b><small>Audited mapped history</small></div>`;document.getElementById('overviewRead').innerHTML=`<b>${activeOverview} read:</b> Repeat rate is <b>${m.repeat_pct.toFixed(1)}%</b>, multi-category penetration is <b>${m.multi_pct.toFixed(1)}%</b>, and average mapped customer value is <b>₹${money(m.avg)}</b>.`;document.getElementById('overviewInsights').innerHTML=`<div class="insight"><b>${money(m.one)} one-bill customers</b> represent the largest relationship-development pool in this channel.</div><div class="insight"><b>${money(m.high)} customers</b> meet the transparent priority rule: 3+ bills, 2+ core categories, or ₹1.5 lakh+ net value.</div>`;const gm=Math.max(1,...m.gaps.map(x=>x[1]));document.getElementById('gapBars').innerHTML=m.gaps.map(x=>`<div class="barrow"><b>${x[0]}</b><div class="track"><div class="fill" style="width:${x[1]/gm*100}%"></div></div><span>${money(x[1])}</span></div>`).join('');const sm=S.store_metrics[activeOverview]||{};const rows=Object.entries(sm).map(([store,v])=>({store,...v})).sort((a,b)=>b.customers-a.customers);document.getElementById('storeTable').innerHTML=rows.map(x=>`<tr><td>${x.store}</td><td>${money(x.customers)}</td><td>${x.repeat_pct.toFixed(1)}%</td><td>${x.multi_pct.toFixed(1)}%</td><td>${money(x.high)}</td><td>₹${money(x.value)}</td></tr>`).join('');document.getElementById('channelTable').innerHTML=CHANNELS.map(c=>{const x=S.channel_metrics[c];return`<tr><td>${c}</td><td>${money(x.customers)}</td><td>${x.repeat_pct.toFixed(1)}%</td><td>${x.multi_pct.toFixed(1)}%</td><td>${money(x.one)}</td><td>₹${money(x.value)}</td></tr>`}).join('')}
 
 // lazy store loader
 function loadStore(ch,store){return new Promise((resolve,reject)=>{const path=(S.files[ch]||{})[store];if(!path)return resolve([]);window.__LG_PAYLOAD=null;window.__LG_RESOLVE=()=>{const a=(window.__LG_PAYLOAD||[]).map(rowObj);window.__LG_RESOLVE=null;resolve(a)};const sc=document.createElement('script');sc.src=path;sc.onerror=()=>{window.__LG_RESOLVE=null;reject(new Error('Unable to load customer data for '+store))};document.head.appendChild(sc);sc.onload=()=>sc.remove()})}

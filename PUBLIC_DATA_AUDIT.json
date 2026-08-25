@@ -1,0 +1,20 @@
+{
+  "privacy": "No customer names, codes, phone numbers or email addresses are written to public assets.",
+  "summary_meta": {
+    "privacy_mode": "aggregate_only",
+    "source_year": 2025,
+    "raw_rows": 1068390,
+    "cancelled_rows_excluded": 170,
+    "exact_duplicate_rows_removed": 71347,
+    "duplicate_customer_codes_affected": 24427,
+    "duplicate_value_removed": 1443495434.929924,
+    "customer_codes": 315757,
+    "dedup_rule": "Exact match across all 53 source columns after excluding cancelled rows",
+    "channel_priority": "Warehouse > SMB > Corporate > E-commerce > Online Executive > Retail Stores",
+    "priority_relationship_rule": "3+ valid sales invoices OR 2+ core Apple device categories OR net value >= INR 150,000"
+  },
+  "channel_customer_sum": 315757,
+  "behavior_groups": 4707,
+  "price_rows_using_realised_value_fallback": 0,
+  "elapsed_seconds": 174.1
+}
