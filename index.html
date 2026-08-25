@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Aptronix Customer Intelligence — Phase 2</title>
+<style>
+:root{--bg:#f5f2ed;--panel:#fffdfa;--ink:#1d1b18;--muted:#706a63;--line:#e4ddd3;--dark:#211f1c;--accent:#b45b2a;--soft:#f7ece4;--green:#3d6b52;--shadow:0 10px 30px rgba(32,28,24,.06)}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink)}button,input,select{font:inherit}
+.app{display:grid;grid-template-columns:240px 1fr;min-height:100vh}aside{background:var(--dark);color:white;padding:24px 18px;position:sticky;top:0;height:100vh}
+.brand{font-size:17px;font-weight:800}.brand small{display:block;font-size:9px;color:#9d9790;text-transform:uppercase;letter-spacing:.9px;margin-top:4px}
+.nav{display:grid;gap:7px;margin-top:28px}.nav button{border:0;background:transparent;color:#bdb7b0;text-align:left;padding:12px;border-radius:12px;cursor:pointer}.nav button.active,.nav button:hover{background:#332f2b;color:white}
+.privacy{position:absolute;bottom:18px;left:18px;right:18px;border:1px solid #3b3732;border-radius:12px;padding:10px;font-size:9.5px;line-height:1.45;color:#aaa39c}
+.top{height:68px;border-bottom:1px solid var(--line);padding:0 27px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:rgba(245,242,237,.95);backdrop-filter:blur(8px);z-index:5}
+.content{max-width:1650px;margin:auto;padding:26px 27px 40px}.view{display:none}.view.active{display:block}
+.hero{margin-bottom:18px}.eyebrow{font-size:9px;font-weight:900;text-transform:uppercase;letter-spacing:1px;color:var(--accent)}h1{margin:4px 0 7px;font-size:30px;letter-spacing:-.9px}.hero p,.desc{color:var(--muted);font-size:11px;line-height:1.5;max-width:980px}
+.pill{border:1px solid #dbc5b6;background:#f8ebe2;color:#7b421f;border-radius:999px;padding:6px 10px;font-size:9px;font-weight:850}
+.kpis{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}.kpi,.card{background:var(--panel);border:1px solid var(--line);border-radius:17px;box-shadow:var(--shadow)}.kpi{padding:15px}.kpi span{font-size:8.5px;text-transform:uppercase;color:var(--muted);letter-spacing:.5px}.kpi b{display:block;font-size:23px;margin:5px 0 3px}.kpi small{font-size:9px;color:var(--muted);line-height:1.35;display:block}
+.grid2{display:grid;grid-template-columns:1.12fr .88fr;gap:12px;margin-top:12px}.card{padding:17px}.card h2{font-size:14px;margin:0}.insights{display:grid;gap:8px;margin-top:12px}.insight{background:#fbf5ef;border-left:3px solid var(--accent);padding:10px 12px;border-radius:0 11px 11px 0;font-size:11px;line-height:1.45}
+.table{width:100%;border-collapse:collapse;margin-top:10px;font-size:10px}.table th{text-align:left;color:var(--muted);text-transform:uppercase;font-size:8px;padding:7px;border-bottom:1px solid var(--line)}.table td{padding:8px 7px;border-bottom:1px solid #eee8e1}.table td:not(:first-child),.table th:not(:first-child){text-align:right}
+.explorer{display:grid;grid-template-columns:400px 1fr;gap:12px}.queue{padding:0;overflow:hidden}.filters{padding:14px;border-bottom:1px solid var(--line)}input,select{width:100%;padding:9px 10px;border-radius:10px;border:1px solid var(--line);background:white;margin-top:7px}.two{display:grid;grid-template-columns:1fr 1fr;gap:7px}.qlist{height:680px;overflow:auto}.qrow{padding:12px 14px;border-bottom:1px solid var(--line);cursor:pointer}.qrow:hover,.qrow.active{background:#f8f2ec}.qname{font-size:12px;font-weight:800}.qmeta{font-size:9.5px;color:var(--muted);margin-top:3px;line-height:1.4}.qline{display:flex;justify-content:space-between;gap:10px}.tags{display:flex;gap:4px;flex-wrap:wrap;margin-top:6px}.tag{font-size:8.5px;border:1px solid var(--line);background:white;border-radius:999px;padding:3px 6px}
+.profile{padding:0;overflow:hidden}.phead{background:linear-gradient(120deg,#24211e,#332e2a);color:white;padding:19px 21px;display:flex;justify-content:space-between;gap:15px}.pname{font-size:20px;font-weight:850}.psub{font-size:9.5px;color:#aaa39c;margin-top:4px}.score{width:68px;height:68px;border:6px solid #d88b56;background:#3a3530;border-radius:50%;display:grid;place-items:center;text-align:center}.score b{font-size:20px}.score small{display:block;font-size:6.5px;text-transform:uppercase;color:#bdb5ae}
+.pbody{padding:17px 19px}.boxes{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.box{border:1px solid var(--line);border-radius:12px;padding:10px}.box span{font-size:8px;color:var(--muted);text-transform:uppercase}.box b{font-size:11.5px;display:block;margin-top:3px;word-break:break-word}.metrics{grid-template-columns:repeat(4,1fr);margin-top:8px}.metrics .box b{font-size:15px}.section{margin-top:14px}.section b{font-size:12px}.journey{display:flex;gap:7px;margin-top:8px;overflow:auto}.node{min-width:98px;padding:10px;border:1px dashed #d8c2b0;border-radius:11px;text-align:center;color:#8e5c3b;background:#fffaf5}.node.have{background:#27231f;color:white;border-style:solid;border-color:#27231f}.node strong{font-size:10px;display:block}.node small{font-size:7.5px;opacity:.7}
+.action{display:grid;grid-template-columns:1.05fr .95fr;gap:9px;margin-top:11px}.next,.why{border-radius:13px;padding:12px}.next{background:var(--soft);border:1px solid #dec4b1}.why{border:1px solid var(--line)}.why ul{font-size:9.5px;color:var(--muted);padding-left:17px;line-height:1.5}
+.behFilters{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;max-width:780px}.behKpis{display:grid;grid-template-columns:repeat(6,1fr);gap:9px;margin-top:12px}.barrow{display:grid;grid-template-columns:115px 1fr 70px;gap:8px;align-items:center;margin-top:9px;font-size:10px}.track{height:8px;background:#eee7df;border-radius:99px;overflow:hidden}.fill{height:100%;background:var(--accent)}.choiceGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.note{font-size:9.5px;line-height:1.5;color:var(--muted);border:1px dashed #d7cfc5;background:#fbfaf8;border-radius:12px;padding:11px;margin-top:12px}.meaning{margin-top:9px;padding:10px 11px;border-radius:11px;background:#f5efe8;border:1px solid #e3d6c9;font-size:10px;line-height:1.5}.meaning b{font-size:10px}.heroFinding{margin-top:12px;padding:13px 14px;border-radius:13px;background:#28241f;color:#fff;font-size:11px;line-height:1.5}.heroFinding b{color:#f0b88f}
+@media(max-width:1100px){.app{grid-template-columns:80px 1fr}.brand,.privacy,.nav span{display:none}.nav button{text-align:center}.kpis,.behKpis{grid-template-columns:repeat(3,1fr)}.grid2,.choiceGrid{grid-template-columns:1fr}.explorer{grid-template-columns:340px 1fr}}
+@media(max-width:800px){
+html{scroll-behavior:smooth}
+body{overflow-x:hidden}
+.app{display:block}
+aside{display:none}
+main{width:100%;min-width:0}
+.top{height:54px;padding:0 12px;top:0}
+.top #crumb{font-size:12px;font-weight:800;max-width:58%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.top .pill{font-size:7.5px;padding:5px 7px}
+.mobileNav{display:flex;position:sticky;top:54px;z-index:9;background:rgba(245,242,237,.97);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding:7px 9px;gap:6px;overflow-x:auto;scrollbar-width:none}
+.mobileNav::-webkit-scrollbar{display:none}
+.mobileNav button{flex:0 0 auto;border:1px solid var(--line);background:#fff;color:var(--muted);border-radius:999px;padding:8px 11px;font-size:9px;font-weight:800;white-space:nowrap}
+.mobileNav button.active{background:var(--dark);border-color:var(--dark);color:#fff}
+.content{padding:14px 11px 34px}
+.hero{margin-bottom:13px}
+h1{font-size:23px;line-height:1.08;margin-top:4px}
+.hero p,.desc{font-size:10.5px;line-height:1.45}
+.eyebrow{font-size:8px}
+.channelbar{display:flex;grid-template-columns:none;overflow-x:auto;gap:6px;margin:10px 0;padding-bottom:2px;scrollbar-width:none}
+.channelbar::-webkit-scrollbar{display:none}
+.chbtn{flex:0 0 auto;padding:8px 10px;font-size:9px}
+.kpis,.behKpis{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+.kpi{padding:12px}
+.kpi b{font-size:20px}
+.kpi small{font-size:8.5px}
+.grid2,.choiceGrid{grid-template-columns:1fr;gap:9px;margin-top:9px}
+.card{border-radius:14px;padding:13px}
+.card h2{font-size:13px}
+.heroFinding,.meaning,.insight,.note{font-size:9.5px}
+.table{min-width:720px}
+.card>div[style*="overflow:auto"],.card>div[style*="max-height"]{-webkit-overflow-scrolling:touch}
+.explorer{grid-template-columns:1fr;gap:10px}
+.queue{border-radius:14px}
+.filters{padding:11px}
+.filters input,.filters select,input,select{font-size:16px;min-height:44px;margin-top:6px}
+.two{grid-template-columns:1fr;gap:0}
+.qlist{height:48vh;min-height:330px;max-height:520px;-webkit-overflow-scrolling:touch}
+.qrow{padding:12px}
+.qname{font-size:12px}
+.qmeta{font-size:9.5px}
+.profile{border-radius:14px}
+.phead{padding:16px 14px;align-items:center}
+.pname{font-size:18px}
+.psub{font-size:8.5px;line-height:1.35}
+.score{width:60px;height:60px;border-width:5px;flex:0 0 60px}
+.score b{font-size:18px}
+.pbody{padding:13px}
+.boxes,.metrics,.contact{grid-template-columns:1fr 1fr;gap:7px}
+.box{padding:9px}
+.box b{font-size:11px}
+.metrics .box b{font-size:14px}
+.journey{gap:6px}
+.node{min-width:88px;padding:9px}
+.action{grid-template-columns:1fr}
+.behFilters{grid-template-columns:1fr;max-width:none}
+.barrow{grid-template-columns:92px 1fr 55px;font-size:9px}
+.mobileBack{display:block!important;width:100%;border:1px solid var(--line);background:#fff;padding:10px;border-radius:10px;margin-bottom:10px;font-size:10px;font-weight:800;color:var(--ink)}
+#marketing .card>div[style*="repeat(5"]{grid-template-columns:1fr!important}
+#marketing .kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+#downloadMarketing{min-height:46px}
+}
+.channelbar{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin:12px 0}.chbtn{padding:10px;border:1px solid var(--line);background:#fff;border-radius:11px;font-size:10px;font-weight:750;cursor:pointer}.chbtn.active{background:#28241f;color:#fff;border-color:#28241f}.segwarn{font-size:9.5px;line-height:1.5;color:#7b5b42;border:1px solid #dfc9b7;background:#fff8f1;border-radius:12px;padding:11px;margin-top:12px}.mobileNav{display:none}.mobileBack{display:none}
+.lgLoading{padding:22px;text-align:center;color:var(--muted);font-size:11px}.lgError{padding:16px;border:1px solid #e0b7aa;background:#fff4ef;color:#7c3c2b;border-radius:12px;font-size:10px}
+</style>
+</head>
+<body><div class="app">
+<aside><div class="brand">Customer Intelligence<small>Aptronix • Phase 2</small></div>
+<div class="nav"><button class="active" data-view="overview"><span>Business Overview</span></button><button data-view="explorer"><span>Customer Explorer</span></button><button data-view="behaviour"><span>Customer Choice Intelligence</span></button><button data-view="marketing"><span>Action / Marketing Export</span></button><button data-view="history"><span>LifeGraph Intelligence</span></button></div>
+<div class="privacy">Contains customer names from posted sales. Keep this build private / access-controlled.</div></aside>
+<main><div class="top"><div id="crumb">Business Overview</div><div class="pill">AUDITED 2024–2025 LIFEGRAPH</div></div>
+<div class="mobileNav" id="mobileNav">
+  <button class="active" data-view="overview">Overview</button>
+  <button data-view="explorer">Customers</button>
+  <button data-view="behaviour">Choice Intelligence</button>
+  <button data-view="marketing">Marketing Export</button><button data-view="history">LifeGraph 2024–25</button>
+</div>
+<div class="content">
+
+<section class="view active" id="overview"><div class="hero"><div class="eyebrow">Customer LifeGraph</div><h1>Business Overview</h1><p>Retail Stores, E-commerce, Warehouse, SMB, Corporate and Online Executive are now viewed separately. Select a channel to see its customer relationship metrics instead of one blended business number.</p></div><div class="channelbar" id="overviewChannels"></div><div class="heroFinding"><b>Data audit applied:</b> 69,926 repeated valid transaction-line rows were removed before customer calculations, affecting 25,090 customer IDs and correcting approximately <b>₹183.00 Cr</b> of duplicated net value. Bills are counted as distinct invoice numbers, while units are counted separately.</div><div class="kpis" id="overviewKpis"></div><div class="heroFinding" id="overviewRead"></div><div class="grid2"><div class="card"><h2>What this channel is telling us</h2><div class="insights" id="overviewInsights"></div></div><div class="card"><h2>Possible next-category pools</h2><div id="gapBars"></div></div></div><div class="card" style="margin-top:12px"><h2>Store / selling-point relationship quality</h2><div class="desc">Complete list for the selected channel — no top-store truncation.</div><div style="max-height:760px;overflow:auto;margin-top:8px"><table class="table"><thead><tr><th>Store / point</th><th>Customers</th><th>Repeat %</th><th>Multi-cat %</th><th>Worth reviewing</th><th>Net value</th></tr></thead><tbody id="storeTable"></tbody></table></div></div><div class="card" style="margin-top:12px"><h2>Channel comparison</h2><div style="overflow:auto;-webkit-overflow-scrolling:touch"><table class="table"><thead><tr><th>Channel</th><th>Customers</th><th>Repeat %</th><th>Multi-cat %</th><th>One-bill</th><th>Net customer value</th></tr></thead><tbody id="channelTable"></tbody></table></div></div><div class="note"><b>Segregation rule:</b> Warehouse → SMB → Corporate → E-commerce → Online Executive → Retail Stores. Retail is therefore the residual customer channel after non-retail relationship types are removed.</div></section>
+<section class="view" id="explorer">
+<div class="hero"><div class="eyebrow">Customer 360</div><h1>Customer Explorer</h1><p>Search the full identifiable customer population or select a store. Each customer card now explains <b>what we know, what it means, why the customer may be worth reviewing now, and the most sensible next conversation</b>. Customer name comes from posted sales; mobile and email are not present in this source and are therefore not invented.</p></div>
+<div class="explorer"><div class="card queue"><div class="filters"><input id="search" placeholder="Search customer name or code"><select id="channelFilter"></select><select id="storeFilter"></select><div class="two"><select id="typeFilter"><option value="all">All customers</option><option value="repeat">Repeat customers</option><option value="multi">Multi-category customers</option><option value="high">Customers worth reviewing</option><option value="one">One-bill customers</option></select><select id="sortFilter"><option value="priority">Sort: Review relevance</option><option value="value">Sort: Value</option><option value="name">Sort: Name</option></select></div><div class="qmeta" id="qstats"></div></div><div class="qlist" id="list"></div></div><div class="card profile"><div id="profile"></div></div></div>
+</section>
+
+<section class="view" id="behaviour">
+<div class="hero"><div class="eyebrow">Store × Customer × Price</div><h1>Customer Choice Intelligence</h1><p>Select a store and a core LOB to understand <b>what customers prefer and how price affects that choice</b>. The page shows product-family demand, MRP versus realised selling value, full-price buying, discount depth and whether a store appears more <b>product-led or discount-led</b>.</p></div>
+<div class="card"><div class="behFilters"><div><div class="desc">Channel</div><select id="behChannel"></select></div><div><div class="desc">Store / selling point</div><select id="behStore"></select></div><div><div class="desc">Core LOB</div><select id="behCore"><option value="all">All LOBs</option><option>iPhone</option><option>Mac</option><option>iPad</option><option>Watch</option><option>AirPods</option></select></div></div>
+<div class="behKpis" id="behKpis"></div></div>
+<div class="choiceGrid">
+<div class="card"><h2>How customers buy vs MRP</h2><div class="desc">Unit mix by effective discount from MRP. “Full price” means realised line value is effectively at MRP.</div><div id="discountBars"></div></div>
+<div class="card"><h2>What customers choose within this LOB</h2><div class="desc">Sub-LOB / product-family mix based on units and realised value for the selected store and LOB.</div><div id="choiceBars"></div></div>
+</div>
+<div class="card" style="margin-top:12px"><h2>Detailed buying pattern</h2><div class="desc">Complete product-family view for the selected Channel × Store × LOB. Columns are now aligned as Units → Customer interactions → MRP → Realised Value → Effective Discount → Full-price Share.</div><table class="table"><thead><tr><th>Sub-LOB / family</th><th>Units</th><th>Customer interactions*</th><th>MRP value</th><th>Realised value</th><th>Effective discount</th><th>Full-price share</th></tr></thead><tbody id="behTable"></tbody></table><div class="note">*Customer interactions are distinct at each Store + Core LOB + Sub-LOB group. When “All stores” or “All LOBs” is selected, the top KPI customer count is shown as the sum of group-level counts and may include customers appearing in more than one group; unit/value/discount measures remain additive and exact.</div></div>
+</section>
+
+
+<section class="view" id="marketing">
+<div class="hero">
+  <div class="eyebrow">Actionable Customer List</div>
+  <h1>Action / Marketing Export</h1>
+  <p>Build a focused customer list for store follow-up, re-invitation and conversion campaigns. Filter by channel, store, customer relationship and suggested next category, review the list on screen, then export the full matching population.</p>
+</div>
+
+<div class="card">
+  <div style="display:grid;grid-template-columns:repeat(5,minmax(150px,1fr));gap:9px">
+    <div><div class="desc">Channel</div><select id="expChannel"></select></div>
+    <div><div class="desc">Store / selling point</div><select id="expStore"></select></div>
+    <div><div class="desc">Action segment</div>
+      <select id="expSegment">
+        <option value="high">Worth reviewing now — Score 60+</option>
+        <option value="medium">Medium potential — Score 40–59</option>
+        <option value="repeat">Repeat customers</option>
+        <option value="one">One-bill customers — re-invite pool</option>
+        <option value="multi">Multi-category customers</option>
+        <option value="all">All customers</option>
+      </select>
+    </div>
+    <div><div class="desc">Suggested next category</div>
+      <select id="expNext">
+        <option value="all">All next categories</option>
+        <option>iPhone</option><option>Mac</option><option>iPad</option><option>Watch</option><option>AirPods</option><option>Lifecycle Review</option>
+      </select>
+    </div>
+    <div><div class="desc">Contact availability</div>
+      <select id="expContactFilter">
+        <option value="all">All customers</option>
+        <option value="ready">Contact-ready only</option>
+        <option value="mobile">Mobile number available</option>
+        <option value="email">Email available</option>
+        <option value="missing">Missing contact details</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<div class="kpis" style="margin-top:11px">
+  <div class="kpi"><span>Customers matched</span><b id="expCount">0</b><small>Full filtered population</small></div>
+  <div class="kpi"><span>Net customer value</span><b id="expValue">₹0</b><small>Historic net posted-sales value</small></div>
+  <div class="kpi"><span>Repeat customers</span><b id="expRepeat">0%</b><small>Share with 2+ valid sales invoices</small></div>
+  <div class="kpi"><span>Multi-category</span><b id="expMulti">0%</b><small>Share across 2+ core Apple LOBs</small></div>
+  <div class="kpi"><span>Contact-ready</span><b id="expContact">0</b><small>Customers with usable mobile or email</small></div>
+  <div class="kpi"><span>Contact-data coverage</span><b id="expCRM">0%</b><small>Share of selected customers ready for outreach</small></div>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <h2>What this list is for</h2>
+    <div class="insights">
+      <div class="insight"><b>Re-invite intelligently.</b> Use purchase history and relationship strength to decide who deserves a relevant follow-up rather than broadcasting to the full customer base.</div>
+      <div class="insight"><b>Give the store a reason to call.</b> Each exported row includes the suggested next category and the reason the customer was highlighted.</div>
+      <div class="insight"><b>Keep outreach measurable.</b> Exported Customer Code can later be matched back to CRM/campaign outcomes to measure response and conversion.</div>
+    </div>
+  </div>
+  <div class="card">
+    <h2>Export the action list</h2>
+    <div class="desc">The download includes the full filtered population, not only the preview shown below. Customer values and unit counts use the audited, de-duplicated transaction logic.</div>
+    <button id="downloadMarketing" style="margin-top:14px;width:100%;padding:12px 14px;border:0;border-radius:11px;background:#211f1c;color:#fff;font-weight:800;cursor:pointer">Export filtered customer report (.CSV)</button>
+    <div class="note"><b>Contact-ready design:</b> Customer Mobile Number and Customer Email Address are now permanent fields in this platform and in every marketing export. The current source does not yet provide them, so they remain blank/awaiting source data. Once those columns are added to the raw file and the dashboard is refreshed, the same filters and exports can use them directly.</div>
+  </div>
+</div>
+
+<div class="card" style="margin-top:12px">
+  <h2>Customer action preview</h2>
+  <div class="desc" id="expPreviewText">Showing the first 100 matching customers below.</div>
+  <div style="overflow:auto;max-height:650px;margin-top:8px">
+    <table class="table">
+      <thead><tr>
+        <th>Customer</th><th>Code</th><th>Contact No.</th><th>Email</th><th>Channel</th><th>Store</th><th>Score</th><th>Bills</th><th>Value</th><th>Categories bought</th><th>Suggested next</th><th>Latest purchase</th>
+      </tr></thead>
+      <tbody id="expTable"></tbody>
+    </table>
+  </div>
+</div>
+</section>
+
+
+
+<section class="view" id="history">
+<div class="hero">
+  <div class="eyebrow">Two-Year Customer Intelligence</div>
+  <h1>LifeGraph Intelligence — 2024–2025</h1>
+  <p>This page converts the audited two-year history into customer-relationship intelligence. Exact Customer Code matches are treated as confirmed continuity; unmatched codes are described as <b>first seen in available history</b> or <b>not seen again</b>, not automatically as new or churned people.</p>
+</div>
+
+<div class="kpis">
+  <div class="kpi"><span>2-year distinct Customer Codes</span><b>560,679</b><small>279,159 in 2024 + 315,757 in 2025 less exact overlap</small></div>
+  <div class="kpi"><span>Confirmed cross-year relationships</span><b>34,237</b><small>Same Customer Code appears in both years</small></div>
+  <div class="kpi"><span>2024 codes seen again in 2025</span><b>12.3%</b><small>34,237 of 279,159 audited 2024 Customer Codes</small></div>
+  <div class="kpi"><span>2025 codes with prior-year match</span><b>10.8%</b><small>34,237 of 315,757 audited 2025 Customer Codes</small></div>
+  <div class="kpi"><span>2024 codes not seen in 2025</span><b>244,922</b><small>Potential reactivation pool after identity/contact validation</small></div>
+  <div class="kpi"><span>2025 codes first seen in history</span><b>281,520</b><small>First seen by Customer Code; not automatically a new person</small></div>
+</div>
+
+<div class="heroFinding"><b>Executive read:</b> Exact Customer Code continuity across 2024→2025 is <b>34,237 customers</b>. That is a meaningful confirmed repeat base, but the much larger unmatched populations should not be called “new” or “churned” until mobile/email lets us identify customers whose Customer Code may have changed. The biggest immediate opportunity is to use the matched population for lifetime-value and ecosystem analysis, while preparing the 244,922 2024-only codes as a reactivation pool once contact identity is available.</div>
+
+<div class="grid2">
+  <div class="card">
+    <h2>Confirmed relationship continuity</h2>
+    <div class="desc">Customers whose exact Customer Code appears in both audited years.</div>
+    <div class="insights">
+      <div class="insight"><b>34,237 confirmed two-year relationships.</b> These customers can safely be treated as returning across years at Customer Code level.</div>
+      <div class="insight"><b>99.99% normalized-name consistency.</b> 34,233 of 34,237 overlapping codes have matching customer names; the remaining four have unavailable later-year names rather than conflicting identities.</div>
+      <div class="insight"><b>Best use:</b> lifetime value, multi-year bill frequency, category progression and upgrade-cycle analysis.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Reactivation opportunity pool</h2>
+    <div class="desc">Customer Codes present in audited 2024 history but not visible under the same code in 2025.</div>
+    <div class="insights">
+      <div class="insight"><b>244,922 2024 Customer Codes are not seen again in 2025 under the same code.</b></div>
+      <div class="insight"><b>Do not label this as churn yet.</b> Some customers may have received a different Customer Code later.</div>
+      <div class="insight"><b>Best use after contact-data join:</b> identify genuinely dormant customers, rank by historical value/category, and create re-invitation campaigns.</div>
+    </div>
+  </div>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <h2>First seen in available history</h2>
+    <div class="desc">Customer Codes visible in 2025 without an exact-code match in 2024.</div>
+    <div class="insights">
+      <div class="insight"><b>281,520 Customer Codes are first seen in the available 2024–2025 code history during 2025.</b></div>
+      <div class="insight"><b>This is not the same as “new customer.”</b> Until mobile/email is available, a changed Customer Code could make an existing person appear new.</div>
+      <div class="insight"><b>Best use:</b> treat as first-seen relationships for current-period engagement while keeping identity confidence explicit.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>What we can activate now</h2>
+    <div class="insights">
+      <div class="insight"><b>Matched 2024→2025 customers:</b> build lifetime value, category journey and repeat-frequency views.</div>
+      <div class="insight"><b>2024-only codes:</b> prepare a dormant/reactivation candidate pool, but activate only after contact identity is connected.</div>
+      <div class="insight"><b>2025 first-seen codes:</b> use purchase recency and ecosystem gaps to build the relationship without calling them definitively new.</div>
+    </div>
+  </div>
+</div>
+
+<details class="card" style="margin-top:12px">
+  <summary style="cursor:pointer;font-weight:800;font-size:13px">View audit & calculation details</summary>
+  <div class="desc" style="margin-top:10px">Audit information is kept here for control and traceability rather than taking over the business view.</div>
+  <div style="overflow:auto;margin-top:8px">
+    <table class="table"><thead><tr><th>Audit check</th><th>2024 result</th></tr></thead><tbody>
+      <tr><td>Valid de-duplicated transaction rows</td><td>745,908</td></tr>
+      <tr><td>POS rows</td><td>742,482</td></tr>
+      <tr><td>Return rows</td><td>3,426</td></tr>
+      <tr><td>Duplicate rows removed</td><td>22,904</td></tr>
+      <tr><td>Cancelled rows excluded</td><td>211</td></tr>
+      <tr><td>Distinct valid sales invoices</td><td>368,717</td></tr>
+      <tr><td>Identifiable Customer Codes</td><td>279,159</td></tr>
+      <tr><td>Audited net customer-linked value</td><td>₹1,384.32 Cr</td></tr>
+    </tbody></table>
+  </div>
+</details>
+
+<div class="note"><b>Identity guardrail:</b> exact Customer Code matches across years are considered confirmed relationships. Different Customer Codes are not automatically merged until Customer Contact Number, Email Address or another stable identifier is available. This prevents customer lifetime value, retention and reactivation numbers from being overstated.</div>
+</section>
+
+
+</div></main></div>
+<script src="data/summary.js"></script><script src="data/behavior.js"></script><script src="data/history_summary.js"></script>
+<script>
+const S=window.LG_SUMMARY,B=window.LG_BEHAVIOR||[],CHANNELS=S.channels,CORE=['iPhone','Mac','iPad','Watch','AirPods'];
+const money=n=>new Intl.NumberFormat('en-IN',{maximumFractionDigits:0}).format(n||0);
+let currentRows=[], currentChannel='Retail Stores', currentStore='';
+function rowObj(z){const p={code:z[0],name:z[1],first:z[2],first_location:z[3],last:z[4],last_location:z[5],invoice_count:z[6],net:z[7],ecosystem:z[8]||[],eco_depth:z[9]||0,repeat:!!z[10],store:z[11],city:z[12],executive:z[13],score:z[14]||0,next_category:z[15]||'Lifecycle Review',_channel:z[16],core_units:z[17]||0,net_units:z[18]||0,phone:'',email:''};p.reasons=reasonsFor(p);p.action=actionFor(p);return p}
+function reasonsFor(p){const a=[];if(p.repeat)a.push('Has purchased on more than one bill');if(p.eco_depth>=2)a.push(`Has bought across ${p.eco_depth} core Apple categories`);if(p.net>=150000)a.push('High total purchase value');else if(p.net>=75000)a.push('Meaningful total purchase value');if(p.first&&p.last&&p.first!==p.last)a.push('Established relationship over time');if(p.core_units>0)a.push('Device purchase history is identifiable');if(p.ecosystem.includes('iPhone')&&!p.ecosystem.includes('Watch'))a.push('Owns iPhone but no Watch purchase is visible');return a.slice(0,5)}
+function actionFor(p){const n=p.next_category;if(n==='Lifecycle Review')return 'Review device age and future upgrade timing before contacting the customer.';return p.repeat?`Use the existing relationship to explore whether ${n} is relevant to the customer.`:`Reconnect after the first purchase and explore whether ${n} can add value.`}
+function purchaseRelationship(p){return{fd:p.first||'Not available',fl:p.first_location||'Location unavailable',ld:p.last||'Not available',ll:p.last_location||'Location unavailable'}}
+function switchView(view,label){const target=document.getElementById(view);if(!target){console.error('Missing view:',view);return;}document.querySelectorAll('.view').forEach(x=>x.classList.remove('active'));target.classList.add('active');document.querySelectorAll('.nav button,.mobileNav button').forEach(x=>x.classList.toggle('active',x.dataset.view===view));document.getElementById('crumb').textContent=label||view;if(view==='explorer')initExplorer();if(view==='behaviour')renderBehaviour();if(view==='marketing')initMarketing();window.scrollTo({top:0,behavior:'smooth'})}
+document.querySelectorAll('.nav button,.mobileNav button').forEach(b=>b.onclick=()=>switchView(b.dataset.view,b.textContent.trim()));
+
+// Overview
+let activeOverview='Retail Stores';
+function renderOverviewChannels(){document.getElementById('overviewChannels').innerHTML=CHANNELS.map(c=>`<button class="chbtn ${c===activeOverview?'active':''}" onclick="activeOverview='${c}';renderOverviewChannels();renderOverview()">${c}</button>`).join('')}
+function renderOverview(){const m=S.channel_metrics[activeOverview]||{customers:0,repeat_pct:0,multi_pct:0,one:0,high:0,value:0,avg:0,gaps:[]};document.getElementById('overviewKpis').innerHTML=`<div class="kpi"><span>Identifiable customers</span><b>${money(m.customers)}</b><small>${activeOverview} customer base</small></div><div class="kpi"><span>Repeat customers</span><b>${m.repeat_pct.toFixed(1)}%</b><small>${money(m.repeat)} customers</small></div><div class="kpi"><span>Multi-category</span><b>${m.multi_pct.toFixed(1)}%</b><small>${money(m.multi)} customers</small></div><div class="kpi"><span>One-bill customers</span><b>${money(m.one)}</b><small>Relationship-development pool</small></div><div class="kpi"><span>Worth reviewing</span><b>${money(m.high)}</b><small>Review score ≥60</small></div><div class="kpi"><span>Net customer value</span><b>₹${(m.value/1e7).toFixed(1)} Cr</b><small>Audited mapped history</small></div>`;document.getElementById('overviewRead').innerHTML=`<b>${activeOverview} read:</b> Repeat rate is <b>${m.repeat_pct.toFixed(1)}%</b>, multi-category penetration is <b>${m.multi_pct.toFixed(1)}%</b>, and average mapped customer value is <b>₹${money(m.avg)}</b>.`;document.getElementById('overviewInsights').innerHTML=`<div class="insight"><b>${money(m.one)} one-bill customers</b> represent the largest re-engagement pool in this channel.</div><div class="insight"><b>${money(m.high)} customers</b> meet the current review threshold based on audited purchase-history signals.</div>`;const gm=Math.max(1,...m.gaps.map(x=>x[1]));document.getElementById('gapBars').innerHTML=m.gaps.map(x=>`<div class="barrow"><b>${x[0]}</b><div class="track"><div class="fill" style="width:${x[1]/gm*100}%"></div></div><span>${money(x[1])}</span></div>`).join('');const sm=S.store_metrics[activeOverview]||{};const rows=Object.entries(sm).map(([store,v])=>({store,...v})).sort((a,b)=>b.customers-a.customers);document.getElementById('storeTable').innerHTML=rows.map(x=>`<tr><td>${x.store}</td><td>${money(x.customers)}</td><td>${x.repeat_pct.toFixed(1)}%</td><td>${x.multi_pct.toFixed(1)}%</td><td>${money(x.high)}</td><td>₹${money(x.value)}</td></tr>`).join('');document.getElementById('channelTable').innerHTML=CHANNELS.map(c=>{const x=S.channel_metrics[c];return`<tr><td>${c}</td><td>${money(x.customers)}</td><td>${x.repeat_pct.toFixed(1)}%</td><td>${x.multi_pct.toFixed(1)}%</td><td>${money(x.one)}</td><td>₹${money(x.value)}</td></tr>`}).join('')}
+
+// lazy store loader
+function loadStore(ch,store){return new Promise((resolve,reject)=>{const path=(S.files[ch]||{})[store];if(!path)return resolve([]);window.__LG_PAYLOAD=null;window.__LG_RESOLVE=()=>{const a=(window.__LG_PAYLOAD||[]).map(rowObj);window.__LG_RESOLVE=null;resolve(a)};const sc=document.createElement('script');sc.src=path;sc.onerror=()=>{window.__LG_RESOLVE=null;reject(new Error('Unable to load customer data for '+store))};document.head.appendChild(sc);sc.onload=()=>sc.remove()})}
+
+// Explorer
+const cf=document.getElementById('channelFilter'),sf=document.getElementById('storeFilter');cf.innerHTML=CHANNELS.map(c=>`<option>${c}</option>`).join('');
+function fillExplorerStores(){const ch=cf.value;const stores=Object.keys(S.files[ch]||{}).sort();sf.innerHTML=stores.map(x=>`<option>${x}</option>`).join('');currentStore=stores[0]||''}
+async function initExplorer(){if(!sf.options.length)fillExplorerStores();if(!sf.value&&sf.options.length)sf.value=sf.options[0].value;await refreshExplorerData()}
+async function refreshExplorerData(){currentChannel=cf.value;currentStore=sf.value;document.getElementById('list').innerHTML='<div class="lgLoading">Loading customer list…</div>';document.getElementById('profile').innerHTML='<div class="lgLoading">Select a customer after the list loads.</div>';try{currentRows=await loadStore(currentChannel,currentStore);renderCustomers()}catch(e){document.getElementById('list').innerHTML=`<div class="lgError">${e.message}</div>`}}
+function customerMatches(p){const q=document.getElementById('search').value.trim().toLowerCase(),t=document.getElementById('typeFilter').value;if(q&&!(p.name+' '+p.code).toLowerCase().includes(q))return false;if(t==='repeat'&&!p.repeat)return false;if(t==='multi'&&p.eco_depth<2)return false;if(t==='high'&&p.score<60)return false;if(t==='one'&&p.invoice_count!==1)return false;return true}
+function renderCustomers(){let a=currentRows.filter(customerMatches);const sort=document.getElementById('sortFilter').value;if(sort==='value')a.sort((x,y)=>y.net-x.net);else if(sort==='name')a.sort((x,y)=>x.name.localeCompare(y.name));else a.sort((x,y)=>y.score-x.score||y.net-x.net);document.getElementById('qstats').textContent=`${a.length.toLocaleString('en-IN')} customers in ${currentStore}`;const lim=window.innerWidth<=800?80:500;document.getElementById('list').innerHTML=a.slice(0,lim).map((p,i)=>`<div class="qrow" data-i="${i}"><div class="qline"><span class="qname">${p.name}</span><b>${p.score}/100</b></div><div class="qmeta">${p.code} • ${p.invoice_count} bill(s) • ₹${money(p.net)} • Next: ${p.next_category}</div><div class="tags">${p.ecosystem.map(x=>`<span class="tag">${x}</span>`).join('')}</div></div>`).join('')+(a.length>lim?`<div class="qmeta" style="padding:12px;text-align:center">Showing first ${lim} of ${a.length.toLocaleString('en-IN')} matches. Use search/filters to narrow.</div>`:'');document.querySelectorAll('#list .qrow').forEach((el,i)=>el.onclick=()=>show(a[i],el));if(a.length)show(a[0],document.querySelector('#list .qrow'))}
+function show(p,e){document.querySelectorAll('.qrow').forEach(x=>x.classList.remove('active'));if(e)e.classList.add('active');const pr=purchaseRelationship(p),avg=p.invoice_count?Math.max(0,p.net)/p.invoice_count:0,rel=p.repeat?'Repeat customer':'One-bill customer',read=p.score>=60?'Strong reason to review now':p.score>=40?'Useful signals are present; review when relevant':'No strong immediate outreach signal';const nodes=CORE.map(x=>`<div class="node ${p.ecosystem.includes(x)?'have':''}"><strong>${x}</strong><small>${p.ecosystem.includes(x)?'Bought':'Not visible'}</small></div>`).join('');document.getElementById('profile').innerHTML=`<div class="pbody" style="padding-bottom:0"><button class="mobileBack" onclick="document.querySelector('.queue').scrollIntoView({behavior:'smooth'})">← Back to customer list</button></div><div class="phead"><div><div class="pname">${p.name}</div><div class="psub">${p.code} • ${p._channel} • ${p.store}</div></div><div class="score"><div><b>${p.score}</b><small>review score</small></div></div></div><div class="pbody"><div class="meaning"><b>What this customer tells us:</b> ${rel}. ${p.eco_depth>=2?'Multi-category relationship.':'Single-category relationship.'} <b>${read}.</b></div><div class="boxes" style="margin-top:10px"><div class="box"><span>Customer name</span><b>${p.name}</b></div><div class="box"><span>Customer contact number</span><b>Awaiting contact field in source</b></div><div class="box"><span>Customer email address</span><b>Awaiting email field in source</b></div></div><div class="boxes metrics"><div class="box"><span>Valid sales invoices</span><b>${p.invoice_count}</b></div><div class="box"><span>Core units bought</span><b>${money(p.core_units)}</b></div><div class="box"><span>Net customer value</span><b>₹${money(p.net)}</b></div><div class="box"><span>Average value / bill</span><b>₹${money(avg)}</b></div></div><div class="section"><b>Customer buying pattern</b><div class="journey">${nodes}</div><div class="meaning"><b>Pattern:</b> ${p.ecosystem.join(' + ')||'No core category identified'}.</div></div><div class="action"><div class="next"><div class="eyebrow">Suggested next conversation</div><b>${p.action}</b><div class="desc">Possible next category: <b>${p.next_category}</b>.</div></div><div class="why"><b>Why this customer is worth reviewing</b><ul>${p.reasons.map(r=>`<li>${r}</li>`).join('')}</ul></div></div><div class="section"><b>Relationship details</b><div class="boxes" style="margin-top:8px"><div class="box"><span>Channel</span><b>${p._channel}</b></div><div class="box"><span>Primary store / point</span><b>${p.store}</b></div><div class="box"><span>Sales executive</span><b>${p.executive||'Not available'}</b></div><div class="box"><span>First purchase date & location</span><b>${pr.fd}</b><div class="qmeta">${pr.fl}</div></div><div class="box"><span>Latest purchase date & location</span><b>${pr.ld}</b><div class="qmeta">${pr.ll}</div></div><div class="box"><span>Relationship type</span><b>${rel}</b></div></div></div></div>`;if(window.innerWidth<=800)setTimeout(()=>document.getElementById('profile').scrollIntoView({behavior:'smooth'}),50)}
+cf.onchange=()=>{fillExplorerStores();refreshExplorerData()};sf.onchange=refreshExplorerData;let stimer;document.getElementById('search').oninput=()=>{clearTimeout(stimer);stimer=setTimeout(renderCustomers,160)};['typeFilter','sortFilter'].forEach(id=>document.getElementById(id).onchange=renderCustomers);
+
+// Behaviour
+const bc=document.getElementById('behChannel'),bs=document.getElementById('behStore');bc.innerHTML=CHANNELS.map(c=>`<option>${c}</option>`).join('');
+function fillBehStores(){const ch=bc.value;const stores=[...new Set(B.filter(x=>x.channel===ch).map(x=>x.store))].sort();bs.innerHTML='<option value="all">All stores / selling points</option>'+stores.map(x=>`<option>${x}</option>`).join('')}
+function renderBehaviour(){if(!bs.options.length)fillBehStores();const ch=bc.value,st=bs.value,core=document.getElementById('behCore').value;const rows=B.filter(x=>x.channel===ch&&(st==='all'||x.store===st)&&(core==='all'||x.core===core));const units=rows.reduce((a,x)=>a+x.units,0),mrp=rows.reduce((a,x)=>a+x.mrp,0),sales=rows.reduce((a,x)=>a+x.sales,0),customers=rows.reduce((a,x)=>a+x.customers,0),full=rows.reduce((a,x)=>a+x.full,0);if(!rows.length){document.getElementById('behKpis').innerHTML='<div class="lgError">No exact MRP buying-behaviour data is available for this selection.</div>';document.getElementById('discountBars').innerHTML='';document.getElementById('choiceBars').innerHTML='';document.getElementById('behTable').innerHTML='';return}const disc=mrp?(mrp-sales)/mrp*100:0;document.getElementById('behKpis').innerHTML=`<div class="kpi"><span>Units bought</span><b>${money(units)}</b></div><div class="kpi"><span>Customer interactions*</span><b>${money(customers)}</b></div><div class="kpi"><span>MRP value</span><b>₹${money(mrp)}</b></div><div class="kpi"><span>Realised value</span><b>₹${money(sales)}</b></div><div class="kpi"><span>Effective discount</span><b>${disc.toFixed(1)}%</b></div><div class="kpi"><span>Full-price share</span><b>${(units?full/units*100:0).toFixed(1)}%</b></div>`;const bands=[['Full price',full],['0–5%',rows.reduce((a,x)=>a+x.d05,0)],['5–10%',rows.reduce((a,x)=>a+x.d510,0)],['10–20%',rows.reduce((a,x)=>a+x.d1020,0)],['>20%',rows.reduce((a,x)=>a+x.d20,0)]],mx=Math.max(1,...bands.map(x=>x[1]));document.getElementById('discountBars').innerHTML=bands.map(x=>`<div class="barrow"><b>${x[0]}</b><div class="track"><div class="fill" style="width:${x[1]/mx*100}%"></div></div><span>${(units?x[1]/units*100:0).toFixed(1)}%</span></div>`).join('');const agg={};rows.forEach(x=>{const a=agg[x.lob]||(agg[x.lob]={units:0,customers:0,mrp:0,sales:0,full:0});a.units+=x.units;a.customers+=x.customers;a.mrp+=x.mrp;a.sales+=x.sales;a.full+=x.full});const ar=Object.entries(agg).map(([lob,v])=>({lob,...v})).sort((a,b)=>b.units-a.units),cm=Math.max(1,...ar.slice(0,10).map(x=>x.units));document.getElementById('choiceBars').innerHTML=ar.slice(0,10).map(x=>`<div class="barrow"><b>${x.lob.length>16?x.lob.slice(0,16)+'…':x.lob}</b><div class="track"><div class="fill" style="width:${x.units/cm*100}%"></div></div><span>${money(x.units)}</span></div>`).join('');document.getElementById('behTable').innerHTML=ar.map(x=>`<tr><td>${x.lob}</td><td>${money(x.units)}</td><td>${money(x.customers)}</td><td>₹${money(x.mrp)}</td><td>₹${money(x.sales)}</td><td>${(x.mrp?(x.mrp-x.sales)/x.mrp*100:0).toFixed(1)}%</td><td>${(x.units?x.full/x.units*100:0).toFixed(1)}%</td></tr>`).join('')}
+bc.onchange=()=>{fillBehStores();renderBehaviour()};bs.onchange=renderBehaviour;document.getElementById('behCore').onchange=renderBehaviour;
+
+// Marketing
+const ec=document.getElementById('expChannel'),es=document.getElementById('expStore');ec.innerHTML=CHANNELS.map(c=>`<option>${c}</option>`).join('');
+function fillExpStores(){const ch=ec.value;const stores=Object.keys(S.files[ch]||{}).sort();es.innerHTML='<option value="all">All stores / selling points</option>'+stores.map(x=>`<option>${x}</option>`).join('')}
+function expStat(){const ch=ec.value,scope=es.value,seg=document.getElementById('expSegment').value,nxt=document.getElementById('expNext').value;return (((S.marketing_stats[ch]||{})[scope]||{})[seg]||{})[nxt]||{count:0,value:0,repeat:0,multi:0}}
+function initMarketing(){if(!es.options.length)fillExpStores();renderMarketing()}
+async function marketingPreview(){if(es.value==='all'){document.getElementById('expTable').innerHTML='<tr><td colspan="10">Select a store for customer-level preview. Channel-wide export remains available.</td></tr>';return}const rows=(await loadStore(ec.value,es.value)).filter(marketingFilter);document.getElementById('expTable').innerHTML=rows.slice(0,100).map(p=>{const pr=purchaseRelationship(p);return`<tr><td>${p.name}</td><td>${p.code}</td><td>—</td><td>—</td><td>${p._channel}</td><td>${p.store}</td><td>${p.score}/100</td><td>${p.invoice_count}</td><td>₹${money(p.net)}</td><td>${pr.ld}<br><span style="font-size:8px">${pr.ll}</span></td></tr>`}).join('')}
+function marketingFilter(p){const seg=document.getElementById('expSegment').value,nxt=document.getElementById('expNext').value;if(nxt!=='all'&&p.next_category!==nxt)return false;if(seg==='high'&&p.score<60)return false;if(seg==='medium'&&(p.score<40||p.score>=60))return false;if(seg==='repeat'&&!p.repeat)return false;if(seg==='one'&&p.invoice_count!==1)return false;if(seg==='multi'&&p.eco_depth<2)return false;return true}
+function renderMarketing(){const x=expStat(),n=x.count;document.getElementById('expCount').textContent=money(n);document.getElementById('expValue').textContent='₹'+money(x.value);document.getElementById('expRepeat').textContent=(n?x.repeat/n*100:0).toFixed(1)+'%';document.getElementById('expMulti').textContent=(n?x.multi/n*100:0).toFixed(1)+'%';document.getElementById('expContact').textContent='0';document.getElementById('expCRM').textContent='0.0%';document.getElementById('expPreviewText').textContent=es.value==='all'?`Channel-wide match: ${money(n)} customers. Select a store for preview; export can process all stores.`:`Showing up to 100 of ${money(n)} matching customers.`;marketingPreview()}
+function csvCell(v){return '"'+String(v??'').replaceAll('"','""')+'"'}
+async function exportMarketing(){const ch=ec.value,stores=es.value==='all'?Object.keys(S.files[ch]||{}):[es.value],headers=['Customer Name','Customer Code','Customer Contact Number','Customer Email Address','Channel','Store / Selling Point','Sales Executive','Review Score','Relationship Type','Valid Sales Invoices','Core Units Bought','Net Customer Value','Categories Already Bought','Suggested Next Category','Suggested Action','Why Highlighted','First Purchase Date','First Purchase Location','Latest Purchase Date','Latest Purchase Location'];const lines=[headers.map(csvCell).join(',')];const btn=document.getElementById('downloadMarketing');btn.disabled=true;for(let i=0;i<stores.length;i++){btn.textContent=`Preparing export… ${i+1}/${stores.length}`;const rows=(await loadStore(ch,stores[i])).filter(marketingFilter);for(const p of rows){const pr=purchaseRelationship(p);lines.push([p.name,p.code,'','',p._channel,p.store,p.executive,p.score,p.repeat?'Repeat customer':'One-bill customer',p.invoice_count,p.core_units,p.net,p.ecosystem.join(' | '),p.next_category,p.action,p.reasons.join(' | '),pr.fd,pr.fl,pr.ld,pr.ll].map(csvCell).join(','))}}const blob=new Blob(['\ufeff'+lines.join('\r\n')],{type:'text/csv;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='Aptronix_Actionable_Customers_'+ch.replace(/[^a-z0-9]+/gi,'_')+'.csv';document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);btn.disabled=false;btn.textContent='Export filtered customer report (.CSV)'}
+ec.onchange=()=>{fillExpStores();renderMarketing()};['expStore','expSegment','expNext','expContactFilter'].forEach(id=>document.getElementById(id).onchange=renderMarketing);document.getElementById('downloadMarketing').onclick=exportMarketing;
+
+renderOverviewChannels();renderOverview();fillExplorerStores();fillBehStores();fillExpStores();
+</script></body></html>
