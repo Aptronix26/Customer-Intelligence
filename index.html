@@ -11,6 +11,7 @@
 .nav{display:grid;gap:7px;margin-top:28px}.nav button{border:0;background:transparent;color:#bdb7b0;text-align:left;padding:12px;border-radius:12px;cursor:pointer}.nav button.active,.nav button:hover{background:#332f2b;color:white}
 .privacy{position:absolute;bottom:18px;left:18px;right:18px;border:1px solid #3b3732;border-radius:12px;padding:10px;font-size:9.5px;line-height:1.45;color:#aaa39c}
 .top{height:68px;border-bottom:1px solid var(--line);padding:0 27px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:rgba(245,242,237,.95);backdrop-filter:blur(8px);z-index:5}
+.suitebar{padding:11px 27px;border-bottom:1px solid var(--line);background:#fffdfa;display:flex;align-items:center;justify-content:space-between;gap:14px}.suiteMeta{display:flex;align-items:center;gap:12px;min-width:0;font-size:9px;color:var(--muted)}.suiteMeta strong{font-size:8px;letter-spacing:1px;color:var(--ink)}.suiteMeta .pass{color:var(--green);font-weight:850}.suiteLinks{display:flex;gap:5px;overflow-x:auto;scrollbar-width:none}.suiteLinks::-webkit-scrollbar{display:none}.suiteLinks a{flex:0 0 auto;text-decoration:none;color:var(--muted);border:1px solid var(--line);background:white;border-radius:999px;padding:6px 9px;font-size:8.5px;font-weight:800;white-space:nowrap}.suiteLinks a.active{background:var(--dark);border-color:var(--dark);color:white}
 .content{max-width:1650px;margin:auto;padding:26px 27px 40px}.view{display:none}.view.active{display:block}
 .hero{margin-bottom:18px}.eyebrow{font-size:9px;font-weight:900;text-transform:uppercase;letter-spacing:1px;color:var(--accent)}h1{margin:4px 0 7px;font-size:30px;letter-spacing:-.9px}.hero p,.desc{color:var(--muted);font-size:11px;line-height:1.5;max-width:980px}
 .pill{border:1px solid #dbc5b6;background:#f8ebe2;color:#7b421f;border-radius:999px;padding:6px 10px;font-size:9px;font-weight:850}
@@ -34,6 +35,7 @@ main{width:100%;min-width:0}
 .top{height:54px;padding:0 12px;top:0}
 .top #crumb{font-size:12px;font-weight:800;max-width:58%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .top .pill{font-size:7.5px;padding:5px 7px}
+.suitebar{padding:8px 10px;display:block}.suiteMeta{gap:7px;overflow-x:auto;white-space:nowrap;padding-bottom:7px}.suiteLinks{padding-bottom:1px}.suiteLinks a{padding:7px 9px;font-size:8px}
 .mobileNav{display:flex;position:sticky;top:54px;z-index:9;background:rgba(245,242,237,.97);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding:7px 9px;gap:6px;overflow-x:auto;scrollbar-width:none}
 .mobileNav::-webkit-scrollbar{display:none}
 .mobileNav button{flex:0 0 auto;border:1px solid var(--line);background:#fff;color:var(--muted);border-radius:999px;padding:8px 11px;font-size:9px;font-weight:800;white-space:nowrap}
@@ -93,11 +95,22 @@ h1{font-size:23px;line-height:1.08;margin-top:4px}
 <aside><div class="brand">Customer Intelligence<small>Aptronix • Verified aggregate build</small></div>
 <div class="nav"><button class="active" data-view="overview"><span>Business Overview</span></button><button data-view="behaviour"><span>Customer Choice Intelligence</span></button><button data-view="history"><span>LifeGraph Intelligence</span></button></div>
 <div class="privacy">Public aggregate-only build. No customer names, customer codes or contact details are included.</div></aside>
-<main><div class="top"><div id="crumb">Business Overview</div><div class="pill">AUDITED 2024–2025 LIFEGRAPH</div></div>
+<main><div class="top"><div id="crumb">Business Overview</div><div class="pill">AUDITED 25 JUN 2023–2025 LIFEGRAPH</div></div>
+<div class="suitebar" aria-label="Dashboard data confidence and navigation">
+  <div class="suiteMeta"><strong>DATA CONFIDENCE</strong><span>25 Jun 2023–31 Dec 2025</span><span>2023 partial period</span><span class="pass">Validation passed</span><span>Published 26 Aug 2026</span><span>Aggregate-only public build</span></div>
+  <nav class="suiteLinks" aria-label="Intelligence dashboards">
+    <a href="https://aptronix26.github.io/Retail-Sales-MTD/">Daily MTD</a>
+    <a href="https://aptronix26.github.io/Boardroom-JAS-Weekly/">Weekly</a>
+    <a href="https://aptronix26.github.io/Boardroom-JAS-QTD/">QTD</a>
+    <a href="https://aptronix26.github.io/Boardroom-JAS-YOY/">YoY</a>
+    <a href="https://aptronix26.github.io/Weekly-Trajectory-Intelligence/">Trajectory</a>
+    <a class="active" aria-current="page" href="https://aptronix26.github.io/Customer-Intelligence/">Customer</a>
+  </nav>
+</div>
 <div class="mobileNav" id="mobileNav">
   <button class="active" data-view="overview">Overview</button>
   <button data-view="behaviour">Choice Intelligence</button>
-  <button data-view="history">LifeGraph 2024–25</button>
+  <button data-view="history">LifeGraph 2023–25</button>
 </div>
 <div class="content">
 
@@ -202,91 +215,22 @@ h1{font-size:23px;line-height:1.08;margin-top:4px}
 
 <section class="view" id="history">
 <div class="hero">
-  <div class="eyebrow">Two-Year Customer Intelligence</div>
-  <h1>LifeGraph Intelligence — 2024–2025</h1>
-  <p>This page converts the audited two-year history into customer-relationship intelligence. Exact Customer Code matches are treated as confirmed continuity; unmatched codes are described as <b>first seen in available history</b> or <b>not seen again</b>, not automatically as new or churned people.</p>
+  <div class="eyebrow">Three-Period Customer Intelligence</div>
+  <h1>LifeGraph Intelligence — 25 Jun 2023 to Dec 2025</h1>
+  <p>This page combines the available 2023 partial period with full calendar years 2024 and 2025. Exact Customer Code matches are treated as confirmed continuity; unmatched codes are described as <b>first seen in available history</b> or <b>not seen again under the same code</b>, not automatically as new or churned people.</p>
 </div>
-
-<div class="kpis">
-  <div class="kpi"><span>2-year distinct Customer Codes</span><b>560,681</b><small>279,159 in 2024 + 315,757 in 2025 less exact overlap</small></div>
-  <div class="kpi"><span>Confirmed cross-year relationships</span><b>34,235</b><small>Same Customer Code appears in both years</small></div>
-  <div class="kpi"><span>2024 codes seen again in 2025</span><b>12.3%</b><small>34,235 of 279,159 audited 2024 Customer Codes</small></div>
-  <div class="kpi"><span>2025 codes with prior-year match</span><b>10.8%</b><small>34,235 of 315,757 audited 2025 Customer Codes</small></div>
-  <div class="kpi"><span>2024 codes not seen in 2025</span><b>244,924</b><small>Potential reactivation pool after identity/contact validation</small></div>
-  <div class="kpi"><span>2025 codes first seen in history</span><b>281,522</b><small>First seen by Customer Code; not automatically a new person</small></div>
-</div>
-
-<div class="heroFinding"><b>Executive read:</b> Exact Customer Code continuity across 2024→2025 is <b>34,235 customers</b>. That is a meaningful confirmed repeat base, but the much larger unmatched populations should not be called “new” or “churned” until a stable identity field lets us identify customers whose Customer Code may have changed. Use the matched population for lifetime-value and ecosystem analysis; treat the 244,924 2024-only codes as a candidate pool pending identity validation.</div>
-
-<div class="grid2">
-  <div class="card">
-    <h2>Confirmed relationship continuity</h2>
-    <div class="desc">Customers whose exact Customer Code appears in both audited years.</div>
-    <div class="insights">
-      <div class="insight"><b>34,235 confirmed two-year relationships.</b> These customers can safely be treated as returning across years at Customer Code level.</div>
-      <div class="insight"><b>100% normalized-name consistency.</b> All 34,235 overlapping codes have matching normalized customer names in the audited sources.</div>
-      <div class="insight"><b>Best use:</b> lifetime value, multi-year bill frequency, category progression and upgrade-cycle analysis.</div>
-    </div>
-  </div>
-
-  <div class="card">
-    <h2>Reactivation opportunity pool</h2>
-    <div class="desc">Customer Codes present in audited 2024 history but not visible under the same code in 2025.</div>
-    <div class="insights">
-      <div class="insight"><b>244,924 2024 Customer Codes are not seen again in 2025 under the same code.</b></div>
-      <div class="insight"><b>Do not label this as churn yet.</b> Some customers may have received a different Customer Code later.</div>
-      <div class="insight"><b>Best use after contact-data join:</b> identify genuinely dormant customers, rank by historical value/category, and create re-invitation campaigns.</div>
-    </div>
-  </div>
-</div>
-
-<div class="grid2">
-  <div class="card">
-    <h2>First seen in available history</h2>
-    <div class="desc">Customer Codes visible in 2025 without an exact-code match in 2024.</div>
-    <div class="insights">
-      <div class="insight"><b>281,522 Customer Codes are first seen in the available 2024–2025 code history during 2025.</b></div>
-      <div class="insight"><b>This is not the same as “new customer.”</b> Until mobile/email is available, a changed Customer Code could make an existing person appear new.</div>
-      <div class="insight"><b>Best use:</b> treat as first-seen relationships for current-period engagement while keeping identity confidence explicit.</div>
-    </div>
-  </div>
-
-  <div class="card">
-    <h2>What we can activate now</h2>
-    <div class="insights">
-      <div class="insight"><b>Matched 2024→2025 customers:</b> build lifetime value, category journey and repeat-frequency views.</div>
-      <div class="insight"><b>2024-only codes:</b> prepare a dormant/reactivation candidate pool, but activate only after contact identity is connected.</div>
-      <div class="insight"><b>2025 first-seen codes:</b> use purchase recency and ecosystem gaps to build the relationship without calling them definitively new.</div>
-    </div>
-  </div>
-</div>
-
-<details class="card" style="margin-top:12px">
-  <summary style="cursor:pointer;font-weight:800;font-size:13px">View audit & calculation details</summary>
-  <div class="desc" style="margin-top:10px">Audit information is kept here for control and traceability rather than taking over the business view.</div>
-  <div style="overflow:auto;margin-top:8px">
-    <table class="table"><thead><tr><th>Audit check</th><th>2024 result</th></tr></thead><tbody>
-      <tr><td>Valid de-duplicated transaction rows</td><td>768,762</td></tr>
-      <tr><td>POS rows</td><td>765,317</td></tr>
-      <tr><td>Return rows</td><td>3,445</td></tr>
-      <tr><td>Exact duplicate rows removed</td><td>50</td></tr>
-      <tr><td>Cancelled rows excluded</td><td>211</td></tr>
-      <tr><td>Distinct valid sales invoices</td><td>368,717</td></tr>
-      <tr><td>Identifiable Customer Codes</td><td>279,159</td></tr>
-      <tr><td>Audited net customer-linked value</td><td>₹1,510.06 Cr</td></tr>
-    </tbody></table>
-  </div>
-</details>
-
-<div class="note"><b>Identity guardrail:</b> exact Customer Code matches across years are considered confirmed relationships. Different Customer Codes are not automatically merged until Customer Contact Number, Email Address or another stable identifier is available. This prevents customer lifetime value, retention and reactivation numbers from being overstated.</div>
+<div id="historyContent"></div>
 </section>
 
 
 </div></main></div>
-<script src="data/summary.js?v=20260825-1"></script><script src="data/behavior.js?v=20260825-1"></script><script src="data/history_summary.js?v=20260825-1"></script>
+<script src="data/summary.js?v=20260825-1"></script><script src="data/behavior.js?v=20260825-1"></script><script src="data/history_summary.js?v=20260826-1"></script>
 <script>
-const S=window.LG_SUMMARY,B=window.LG_BEHAVIOR||[],CHANNELS=S.channels,CORE=['iPhone','Mac','iPad','Watch','AirPods'];
+const S=window.LG_SUMMARY,B=window.LG_BEHAVIOR||[],H=window.LG_HISTORY,CHANNELS=S.channels,CORE=['iPhone','Mac','iPad','Watch','AirPods'];
 const money=n=>new Intl.NumberFormat('en-IN',{maximumFractionDigits:0}).format(n||0);
+const pct=n=>`${((n||0)*100).toFixed(1)}%`;
+const crore=n=>`₹${((n||0)/1e7).toFixed(2)} Cr`;
+function renderHistory(){const x=H.cross_period,p23=H[2023],p24=H[2024],p25=H[2025],auditRows=[['Coverage',`${p23.min_date_text} to ${p23.max_date_text}`,'Full calendar year','Full calendar year'],['Valid de-duplicated transaction rows',money(p23.valid_deduplicated_rows),money(p24.valid_deduplicated_rows),money(p25.valid_deduplicated_rows)],['POS rows',money(p23.pos_rows),money(p24.pos_rows),money(p25.pos_rows)],['Return rows',money(p23.return_rows),money(p24.return_rows),money(p25.return_rows)],['Exact duplicate rows removed',money(p23.duplicate_rows_removed),money(p24.duplicate_rows_removed),money(p25.duplicate_rows_removed)],['Cancelled rows excluded',money(p23.cancelled_rows),money(p24.cancelled_rows),money(p25.cancelled_rows)],['Distinct valid sales invoices',money(p23.distinct_valid_sales_invoices),money(p24.distinct_valid_sales_invoices),money(p25.distinct_valid_sales_invoices)],['Identifiable Customer Codes',money(p23.identifiable_customer_codes),money(p24.identifiable_customer_codes),money(p25.identifiable_customer_codes)],['Audited net customer-linked value',crore(p23.net_customer_linked_value),crore(p24.net_customer_linked_value),crore(p25.net_customer_linked_value)]];document.getElementById('historyContent').innerHTML=`<div class="kpis"><div class="kpi"><span>3-period distinct Customer Codes</span><b>${money(x.distinct_codes)}</b><small>Union across available 2023, 2024 and 2025 sources</small></div><div class="kpi"><span>Present in all 3 periods</span><b>${money(x.exact_code_overlap_all_three)}</b><small>Exact Customer Code continuity</small></div><div class="kpi"><span>2023→2024 exact matches</span><b>${money(x.overlap_2023_2024)}</b><small>2023 coverage is partial</small></div><div class="kpi"><span>2024→2025 exact matches</span><b>${money(x.overlap_2024_2025)}</b><small>Full-year source comparison</small></div><div class="kpi"><span>2023 codes seen in 2024</span><b>${pct(x['2023_seen_in_2024_rate'])}</b><small>${money(x.overlap_2023_2024)} of ${money(p23.identifiable_customer_codes)}</small></div><div class="kpi"><span>2024 codes seen in 2025</span><b>${pct(x['2024_seen_in_2025_rate'])}</b><small>${money(x.overlap_2024_2025)} of ${money(p24.identifiable_customer_codes)}</small></div></div><div class="heroFinding"><b>Executive read:</b> <b>${money(x.exact_code_overlap_all_three)} Customer Codes</b> are present in all three available periods. Exact-code continuity rises from <b>${money(x.overlap_2023_2024)}</b> between the partial 2023 source and 2024 to <b>${money(x.overlap_2024_2025)}</b> between the two full calendar years. These are confirmed code-level relationships—not definitive person-level retention—until a stable contact identifier is available.</div><div class="grid2"><div class="card"><h2>Confirmed relationship continuity</h2><div class="insights"><div class="insight"><b>${money(x.exact_code_overlap_all_three)} codes appear in all three periods.</b> All have consistent normalized names across the supplied sources.</div><div class="insight"><b>${money(x.overlap_2023_2024)} exact matches</b> connect the available 2023 history to 2024.</div><div class="insight"><b>${money(x.overlap_2024_2025)} exact matches</b> connect the two complete calendar years.</div></div></div><div class="card"><h2>Coverage and identity guardrails</h2><div class="insights"><div class="insight"><b>2023 is partial:</b> the supplied file actually covers ${p23.min_date_text} to ${p23.max_date_text}, including late June.</div><div class="insight"><b>${money(x['2023_only'])} codes appear only in the partial 2023 source</b> and <b>${money(x['2025_only'])} only in 2025</b>; neither group should automatically be called churned or new people.</div><div class="insight"><b>Best next step:</b> connect mobile/email or another stable identifier before person-level retention or reactivation campaigns.</div></div></div></div><div class="card" style="margin-top:12px"><h2>Mutually exclusive code-history cohorts</h2><div class="desc">Every distinct Customer Code is counted once; the cohort total reconciles to ${money(x.distinct_codes)}.</div><div style="overflow:auto"><table class="table"><thead><tr><th>Cohort</th><th>Customer Codes</th></tr></thead><tbody><tr><td>2023 only</td><td>${money(x['2023_only'])}</td></tr><tr><td>2024 only</td><td>${money(x['2024_only'])}</td></tr><tr><td>2025 only</td><td>${money(x['2025_only'])}</td></tr><tr><td>2023 + 2024 only</td><td>${money(x['2023_2024_only'])}</td></tr><tr><td>2023 + 2025 only</td><td>${money(x['2023_2025_only'])}</td></tr><tr><td>2024 + 2025 only</td><td>${money(x['2024_2025_only'])}</td></tr><tr><td>All three periods</td><td>${money(x.exact_code_overlap_all_three)}</td></tr></tbody></table></div></div><details class="card" style="margin-top:12px"><summary style="cursor:pointer;font-weight:800;font-size:13px">View source audit & calculation details</summary><div class="desc" style="margin-top:10px">All periods use the same cancellation exclusion and exact 51-column row de-duplication logic.</div><div style="overflow:auto;margin-top:8px"><table class="table"><thead><tr><th>Audit check</th><th>2023 partial</th><th>2024</th><th>2025</th></tr></thead><tbody>${auditRows.map(r=>`<tr>${r.map(v=>`<td>${v}</td>`).join('')}</tr>`).join('')}</tbody></table></div></details><div class="note"><b>Identity guardrail:</b> exact Customer Code matches across periods are considered confirmed code-level relationships. Different Customer Codes are not merged until Customer Contact Number, Email Address or another stable identifier is available. <b>Period guardrail:</b> the 2023 source is partial and is not presented as a full-year comparison.</div>`}
 let currentRows=[], currentChannel='Retail Stores', currentStore='';
 function rowObj(z){const p={code:z[0],name:z[1],first:z[2],first_location:z[3],last:z[4],last_location:z[5],invoice_count:z[6],net:z[7],ecosystem:z[8]||[],eco_depth:z[9]||0,repeat:!!z[10],store:z[11],city:z[12],executive:z[13],score:z[14]||0,next_category:z[15]||'Lifecycle Review',_channel:z[16],core_units:z[17]||0,net_units:z[18]||0,phone:'',email:''};p.reasons=reasonsFor(p);p.action=actionFor(p);return p}
 function reasonsFor(p){const a=[];if(p.repeat)a.push('Has purchased on more than one bill');if(p.eco_depth>=2)a.push(`Has bought across ${p.eco_depth} core Apple categories`);if(p.net>=150000)a.push('High total purchase value');else if(p.net>=75000)a.push('Meaningful total purchase value');if(p.first&&p.last&&p.first!==p.last)a.push('Established relationship over time');if(p.core_units>0)a.push('Device purchase history is identifiable');if(p.ecosystem.includes('iPhone')&&!p.ecosystem.includes('Watch'))a.push('Owns iPhone but no Watch purchase is visible');return a.slice(0,5)}
@@ -331,5 +275,5 @@ function csvCell(v){return '"'+String(v??'').replaceAll('"','""')+'"'}
 async function exportMarketing(){const ch=ec.value,stores=es.value==='all'?Object.keys(S.files[ch]||{}):[es.value],headers=['Customer Name','Customer Code','Customer Contact Number','Customer Email Address','Channel','Store / Selling Point','Sales Executive','Review Score','Relationship Type','Valid Sales Invoices','Core Units Bought','Net Customer Value','Categories Already Bought','Suggested Next Category','Suggested Action','Why Highlighted','First Purchase Date','First Purchase Location','Latest Purchase Date','Latest Purchase Location'];const lines=[headers.map(csvCell).join(',')];const btn=document.getElementById('downloadMarketing');btn.disabled=true;for(let i=0;i<stores.length;i++){btn.textContent=`Preparing export… ${i+1}/${stores.length}`;const rows=(await loadStore(ch,stores[i])).filter(marketingFilter);for(const p of rows){const pr=purchaseRelationship(p);lines.push([p.name,p.code,'','',p._channel,p.store,p.executive,p.score,p.repeat?'Repeat customer':'One-bill customer',p.invoice_count,p.core_units,p.net,p.ecosystem.join(' | '),p.next_category,p.action,p.reasons.join(' | '),pr.fd,pr.fl,pr.ld,pr.ll].map(csvCell).join(','))}}const blob=new Blob(['\ufeff'+lines.join('\r\n')],{type:'text/csv;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='Aptronix_Actionable_Customers_'+ch.replace(/[^a-z0-9]+/gi,'_')+'.csv';document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);btn.disabled=false;btn.textContent='Export filtered customer report (.CSV)'}
 ec.onchange=()=>{fillExpStores();renderMarketing()};['expStore','expSegment','expNext','expContactFilter'].forEach(id=>document.getElementById(id).onchange=renderMarketing);document.getElementById('downloadMarketing').onclick=exportMarketing;
 
-renderOverviewChannels();renderOverview();fillExplorerStores();fillBehStores();fillExpStores();
+renderOverviewChannels();renderOverview();renderHistory();fillExplorerStores();fillBehStores();fillExpStores();
 </script></body></html>
