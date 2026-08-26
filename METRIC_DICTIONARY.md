@@ -32,3 +32,17 @@ Each customer belongs to one channel using this priority: Warehouse → SMB → 
 - Realised value uses the audited source realised-value field.
 - Discount bands are based on effective realised discount from MRP: full price, 0–5%, 5–10%, 10–20%, and above 20%.
 - Customer interactions are distinct within each Store × Core LOB × Sub-LOB group. They are not additive across groups; unit and value measures are additive.
+
+## Data Export Centre
+
+- Public export grain: Date × City × Store / Selling Point × Channel × Product Family.
+- Filters: supplied date range, city, store / selling point, channel, and product family.
+- Report layouts: daily detailed cells, monthly, city, store, channel, or product-family summary.
+- Privacy suppression: a granular cell is not written to the public data asset unless it contains at least 10 distinct identifiable Customer Codes. Low-volume store cells are combined into a city rollup, and remaining low-volume city cells into a national rollup. A rollup is published only when it also reaches 10 customers; anything still below the threshold is excluded. The original low-volume cells cannot be recovered in the browser or in a download.
+- Transaction lines: valid, de-duplicated customer-linked source rows after cancelled rows are excluded.
+- Invoice interactions: distinct Transaction Type + Invoice Number combinations within an original published cell. This is non-additive across cells and is labelled as summed interactions in summary layouts.
+- Customer interactions: distinct Customer Codes within an original published cell. This is non-additive across cells and is labelled as summed interactions in summary layouts.
+- Net units: signed, additive quantity, including returns.
+- Net value: signed, additive source `Total` in INR, including returns.
+- CSV and JSON downloads are standards-based. The Excel download is SpreadsheetML XML, which opens directly in Microsoft Excel without embedding a third-party library.
+- Public exports contain no customer name, Customer Code, phone number, email address, or sales-executive identifier. Customer-level activation remains a separate private-tool requirement.

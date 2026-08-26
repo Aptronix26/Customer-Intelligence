@@ -25,6 +25,7 @@
 .behFilters{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;max-width:780px}.behKpis{display:grid;grid-template-columns:repeat(6,1fr);gap:9px;margin-top:12px}.barrow{display:grid;grid-template-columns:115px 1fr 70px;gap:8px;align-items:center;margin-top:9px;font-size:10px}.track{height:8px;background:#eee7df;border-radius:99px;overflow:hidden}.fill{height:100%;background:var(--accent)}.choiceGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
 .note{font-size:9.5px;line-height:1.5;color:var(--muted);border:1px dashed #d7cfc5;background:#fbfaf8;border-radius:12px;padding:11px;margin-top:12px}.meaning{margin-top:9px;padding:10px 11px;border-radius:11px;background:#f5efe8;border:1px solid #e3d6c9;font-size:10px;line-height:1.5}.meaning b{font-size:10px}.heroFinding{margin-top:12px;padding:13px 14px;border-radius:13px;background:#28241f;color:#fff;font-size:11px;line-height:1.5}.heroFinding b{color:#f0b88f}
 .channelbar{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin:12px 0}.chbtn{padding:10px;border:1px solid var(--line);background:#fff;border-radius:11px;font-size:10px;font-weight:750;cursor:pointer}.chbtn.active{background:#28241f;color:#fff;border-color:#28241f}.segwarn{font-size:9.5px;line-height:1.5;color:#7b5b42;border:1px solid #dfc9b7;background:#fff8f1;border-radius:12px;padding:11px;margin-top:12px}.mobileNav{display:none}.mobileBack{display:none}
+.exportFilters{display:grid;grid-template-columns:repeat(4,minmax(150px,1fr));gap:9px}.exportActions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.exportActions button{border:0;border-radius:10px;background:var(--dark);color:white;padding:10px 14px;font-size:10px;font-weight:850;cursor:pointer}.exportActions button.secondary{background:white;color:var(--ink);border:1px solid var(--line)}.exportStatus{font-size:9.5px;color:var(--muted);margin-top:10px;line-height:1.5}.exportTableWrap{overflow:auto;max-height:620px;margin-top:8px;-webkit-overflow-scrolling:touch}.exportTableWrap .table{min-width:980px}
 @media(max-width:1100px){.app{grid-template-columns:80px 1fr}.brand,.privacy,.nav span{display:none}.nav button{text-align:center}.kpis,.behKpis{grid-template-columns:repeat(3,1fr)}.grid2,.choiceGrid{grid-template-columns:1fr}.explorer{grid-template-columns:340px 1fr}}
 @media(max-width:800px){
 html{scroll-behavior:smooth}
@@ -87,13 +88,15 @@ h1{font-size:23px;line-height:1.08;margin-top:4px}
 #marketing .card>div[style*="repeat(5"]{grid-template-columns:1fr!important}
 #marketing .kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
 #downloadMarketing{min-height:46px}
+#export .exportFilters{grid-template-columns:1fr}
+#export .exportActions button{flex:1 1 130px;min-height:44px}
 }
 .lgLoading{padding:22px;text-align:center;color:var(--muted);font-size:11px}.lgError{padding:16px;border:1px solid #e0b7aa;background:#fff4ef;color:#7c3c2b;border-radius:12px;font-size:10px}
 </style>
 </head>
 <body><div class="app">
 <aside><div class="brand">Customer Intelligence<small>Aptronix • Verified aggregate build</small></div>
-<div class="nav"><button class="active" data-view="overview"><span>Business Overview</span></button><button data-view="behaviour"><span>Customer Choice Intelligence</span></button><button data-view="history"><span>LifeGraph Intelligence</span></button></div>
+<div class="nav"><button class="active" data-view="overview"><span>Business Overview</span></button><button data-view="behaviour"><span>Customer Choice Intelligence</span></button><button data-view="history"><span>LifeGraph Intelligence</span></button><button data-view="export"><span>Data Export Centre</span></button></div>
 <div class="privacy">Public aggregate-only build. No customer names, customer codes or contact details are included.</div></aside>
 <main><div class="top"><div id="crumb">Business Overview</div><div class="pill">AUDITED 25 JUN 2023–2025 LIFEGRAPH</div></div>
 <div class="suitebar" aria-label="Dashboard data confidence and navigation">
@@ -111,6 +114,7 @@ h1{font-size:23px;line-height:1.08;margin-top:4px}
   <button class="active" data-view="overview">Overview</button>
   <button data-view="behaviour">Choice Intelligence</button>
   <button data-view="history">LifeGraph 2023–25</button>
+  <button data-view="export">Data Export Centre</button>
 </div>
 <div class="content">
 
@@ -222,11 +226,39 @@ h1{font-size:23px;line-height:1.08;margin-top:4px}
 <div id="historyContent"></div>
 </section>
 
+<section class="view" id="export">
+<div class="hero"><div class="eyebrow">Public-Safe Analysis & Download</div><h1>Data Export Centre</h1><p>Build a reusable aggregate report across the available 2023–2025 history. Filter any supplied date range, city, store, channel and product family; preview the result and download it as CSV, Excel-compatible XML or JSON.</p></div>
+<div class="card">
+  <div class="exportFilters">
+    <div><div class="desc">Start date</div><input type="date" id="exStart"></div>
+    <div><div class="desc">End date</div><input type="date" id="exEnd"></div>
+    <div><div class="desc">City</div><select id="exCity"></select></div>
+    <div><div class="desc">Store / selling point</div><select id="exStore"></select></div>
+    <div><div class="desc">Channel</div><select id="exChannel"></select></div>
+    <div><div class="desc">Product family</div><select id="exFamily"></select></div>
+    <div><div class="desc">Report layout</div><select id="exGroup"><option value="detail">Daily detailed cells</option><option value="month">Monthly summary</option><option value="city">City summary</option><option value="store">Store summary</option><option value="channel">Channel summary</option><option value="family">Product-family summary</option></select></div>
+    <div><div class="desc">Preview rows</div><select id="exLimit"><option value="50">50 rows</option><option value="100" selected>100 rows</option><option value="250">250 rows</option></select></div>
+  </div>
+  <div class="exportActions"><button id="exApply">Apply filters</button><button class="secondary" id="exReset">Reset</button><button id="exCsv">Download CSV</button><button id="exExcel">Download Excel XML</button><button id="exJson">Download JSON</button></div>
+  <div class="exportStatus" id="exStatus">Preparing the aggregate export dataset…</div>
+</div>
+<div class="kpis" style="margin-top:11px">
+  <div class="kpi"><span>Net value</span><b id="exValue">₹0</b><small>Additive, includes returns</small></div>
+  <div class="kpi"><span>Net units</span><b id="exUnits">0</b><small>Additive signed quantity</small></div>
+  <div class="kpi"><span>Transaction lines</span><b id="exLines">0</b><small>Valid customer-linked rows</small></div>
+  <div class="kpi"><span>Published cells</span><b id="exCells">0</b><small>After privacy suppression</small></div>
+  <div class="kpi"><span>Cities</span><b id="exCities">0</b><small>Distinct filtered cities</small></div>
+  <div class="kpi"><span>Stores / points</span><b id="exStores">0</b><small>Distinct filtered locations</small></div>
+</div>
+<div class="card" style="margin-top:12px"><h2>Filtered preview</h2><div class="desc">Downloads contain every filtered row, not only the preview. Revenue, units and lines are additive. Customer and invoice interactions are distinct within each original published cell and become non-additive when summary layouts combine cells.</div><div class="exportTableWrap"><table class="table"><thead id="exHead"></thead><tbody id="exBody"></tbody></table></div></div>
+<div class="note"><b>Public privacy rule:</b> the downloadable file contains no customer names, codes, phone numbers, emails or sales-executive identifiers. Daily Store × City × Channel × Product Family cells with fewer than <b>10 identifiable customers</b> are not published at granular level; their activity is rolled up to a safe city or national aggregate where possible, and any remaining low-volume rollup is excluded. The status line reports retained net-value coverage. For customer-level marketing activation, use a separate private access-controlled tool.</div>
+</section>
+
 
 </div></main></div>
-<script src="data/summary.js?v=20260825-1"></script><script src="data/behavior.js?v=20260825-1"></script><script src="data/history_summary.js?v=20260826-1"></script>
+<script src="data/summary.js?v=20260825-1"></script><script src="data/behavior.js?v=20260825-1"></script><script src="data/history_summary.js?v=20260826-1"></script><script src="data/export_aggregate.js?v=20260826-1"></script>
 <script>
-const S=window.LG_SUMMARY,B=window.LG_BEHAVIOR||[],H=window.LG_HISTORY,CHANNELS=S.channels,CORE=['iPhone','Mac','iPad','Watch','AirPods'];
+const S=window.LG_SUMMARY,B=window.LG_BEHAVIOR||[],H=window.LG_HISTORY,X=window.LG_EXPORT,CHANNELS=S.channels,CORE=['iPhone','Mac','iPad','Watch','AirPods'];
 const money=n=>new Intl.NumberFormat('en-IN',{maximumFractionDigits:0}).format(n||0);
 const pct=n=>`${((n||0)*100).toFixed(1)}%`;
 const crore=n=>`₹${((n||0)/1e7).toFixed(2)} Cr`;
@@ -236,7 +268,7 @@ function rowObj(z){const p={code:z[0],name:z[1],first:z[2],first_location:z[3],l
 function reasonsFor(p){const a=[];if(p.repeat)a.push('Has purchased on more than one bill');if(p.eco_depth>=2)a.push(`Has bought across ${p.eco_depth} core Apple categories`);if(p.net>=150000)a.push('High total purchase value');else if(p.net>=75000)a.push('Meaningful total purchase value');if(p.first&&p.last&&p.first!==p.last)a.push('Established relationship over time');if(p.core_units>0)a.push('Device purchase history is identifiable');if(p.ecosystem.includes('iPhone')&&!p.ecosystem.includes('Watch'))a.push('Owns iPhone but no Watch purchase is visible');return a.slice(0,5)}
 function actionFor(p){const n=p.next_category;if(n==='Lifecycle Review')return 'Review device age and future upgrade timing before contacting the customer.';return p.repeat?`Use the existing relationship to explore whether ${n} is relevant to the customer.`:`Reconnect after the first purchase and explore whether ${n} can add value.`}
 function purchaseRelationship(p){return{fd:p.first||'Not available',fl:p.first_location||'Location unavailable',ld:p.last||'Not available',ll:p.last_location||'Location unavailable'}}
-function switchView(view,label){const target=document.getElementById(view);if(!target){console.error('Missing view:',view);return;}document.querySelectorAll('.view').forEach(x=>x.classList.remove('active'));target.classList.add('active');document.querySelectorAll('.nav button,.mobileNav button').forEach(x=>x.classList.toggle('active',x.dataset.view===view));document.getElementById('crumb').textContent=label||view;if(view==='explorer')initExplorer();if(view==='behaviour')renderBehaviour();if(view==='marketing')initMarketing();window.scrollTo({top:0,behavior:'smooth'})}
+function switchView(view,label){const target=document.getElementById(view);if(!target){console.error('Missing view:',view);return;}document.querySelectorAll('.view').forEach(x=>x.classList.remove('active'));target.classList.add('active');document.querySelectorAll('.nav button,.mobileNav button').forEach(x=>x.classList.toggle('active',x.dataset.view===view));document.getElementById('crumb').textContent=label||view;if(view==='explorer')initExplorer();if(view==='behaviour')renderBehaviour();if(view==='marketing')initMarketing();if(view==='export')initExport();window.scrollTo({top:0,behavior:'smooth'})}
 document.querySelectorAll('.nav button,.mobileNav button').forEach(b=>b.onclick=()=>switchView(b.dataset.view,b.textContent.trim()));
 
 // Overview
@@ -274,6 +306,23 @@ function renderMarketing(){const x=expStat(),n=x.count;document.getElementById('
 function csvCell(v){return '"'+String(v??'').replaceAll('"','""')+'"'}
 async function exportMarketing(){const ch=ec.value,stores=es.value==='all'?Object.keys(S.files[ch]||{}):[es.value],headers=['Customer Name','Customer Code','Customer Contact Number','Customer Email Address','Channel','Store / Selling Point','Sales Executive','Review Score','Relationship Type','Valid Sales Invoices','Core Units Bought','Net Customer Value','Categories Already Bought','Suggested Next Category','Suggested Action','Why Highlighted','First Purchase Date','First Purchase Location','Latest Purchase Date','Latest Purchase Location'];const lines=[headers.map(csvCell).join(',')];const btn=document.getElementById('downloadMarketing');btn.disabled=true;for(let i=0;i<stores.length;i++){btn.textContent=`Preparing export… ${i+1}/${stores.length}`;const rows=(await loadStore(ch,stores[i])).filter(marketingFilter);for(const p of rows){const pr=purchaseRelationship(p);lines.push([p.name,p.code,'','',p._channel,p.store,p.executive,p.score,p.repeat?'Repeat customer':'One-bill customer',p.invoice_count,p.core_units,p.net,p.ecosystem.join(' | '),p.next_category,p.action,p.reasons.join(' | '),pr.fd,pr.fl,pr.ld,pr.ll].map(csvCell).join(','))}}const blob=new Blob(['\ufeff'+lines.join('\r\n')],{type:'text/csv;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='Aptronix_Actionable_Customers_'+ch.replace(/[^a-z0-9]+/gi,'_')+'.csv';document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);btn.disabled=false;btn.textContent='Export filtered customer report (.CSV)'}
 ec.onchange=()=>{fillExpStores();renderMarketing()};['expStore','expSegment','expNext','expContactFilter'].forEach(id=>document.getElementById(id).onchange=renderMarketing);document.getElementById('downloadMarketing').onclick=exportMarketing;
+
+// Public aggregate Data Export Centre
+const EXCOLS=X?.columns||[],EXROWS=X?.rows||[];
+let exReady=false,exResult=[],exHeaders=[];
+const exEsc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const exUnique=(index,rows=EXROWS)=>[...new Set(rows.map(r=>r[index]).filter(Boolean))].sort((a,b)=>String(a).localeCompare(String(b)));
+function exOptions(id,values,label){document.getElementById(id).innerHTML=`<option value="all">All ${label}</option>`+values.map(v=>`<option value="${exEsc(v)}">${exEsc(v)}</option>`).join('')}
+function initExport(){if(exReady)return;if(!X||!EXROWS.length){document.getElementById('exStatus').textContent='The aggregate export dataset is unavailable.';return}document.getElementById('exStart').value=X.meta.coverage_start;document.getElementById('exEnd').value=X.meta.coverage_end;exOptions('exCity',exUnique(1),'cities');exOptions('exStore',exUnique(2),'stores / points');exOptions('exChannel',exUnique(3),'channels');exOptions('exFamily',exUnique(4),'product families');exReady=true;renderExport()}
+function filteredExport(){const start=document.getElementById('exStart').value,end=document.getElementById('exEnd').value,city=document.getElementById('exCity').value,store=document.getElementById('exStore').value,channel=document.getElementById('exChannel').value,family=document.getElementById('exFamily').value;return EXROWS.filter(r=>(!start||r[0]>=start)&&(!end||r[0]<=end)&&(city==='all'||r[1]===city)&&(store==='all'||r[2]===store)&&(channel==='all'||r[3]===channel)&&(family==='all'||r[4]===family))}
+function groupedExport(rows){const mode=document.getElementById('exGroup').value;if(mode==='detail')return{headers:EXCOLS,rows};const dimensions={month:[[0,'month']],city:[[1,'city']],store:[[1,'city'],[2,'store']],channel:[[3,'channel']],family:[[4,'product_family']]}[mode],map=new Map;for(const r of rows){const vals=dimensions.map(([i])=>i===0?r[0].slice(0,7):r[i]),key=JSON.stringify(vals),a=map.get(key)||[...vals,0,0,0,0,0];a[vals.length]+=r[5];a[vals.length+1]+=r[6];a[vals.length+2]+=r[7];a[vals.length+3]+=r[8];a[vals.length+4]+=r[9];map.set(key,a)}return{headers:[...dimensions.map(x=>x[1]),'transaction_lines','invoice_interactions_summed','customer_interactions_summed','net_units','net_value_inr'],rows:[...map.values()].sort((a,b)=>JSON.stringify(a).localeCompare(JSON.stringify(b)))}}
+function renderExport(){if(!exReady)return;const base=filteredExport(),result=groupedExport(base);exResult=result.rows;exHeaders=result.headers;const value=base.reduce((n,r)=>n+r[9],0),units=base.reduce((n,r)=>n+r[8],0),lines=base.reduce((n,r)=>n+r[5],0);document.getElementById('exValue').textContent=crore(value);document.getElementById('exUnits').textContent=money(units);document.getElementById('exLines').textContent=money(lines);document.getElementById('exCells').textContent=money(base.length);document.getElementById('exCities').textContent=money(new Set(base.map(r=>r[1])).size);document.getElementById('exStores').textContent=money(new Set(base.map(r=>r[2])).size);const lim=Number(document.getElementById('exLimit').value);document.getElementById('exHead').innerHTML='<tr>'+exHeaders.map(h=>`<th>${exEsc(h.replaceAll('_',' '))}</th>`).join('')+'</tr>';document.getElementById('exBody').innerHTML=exResult.slice(0,lim).map(r=>'<tr>'+r.map((v,i)=>`<td>${exEsc(i>=r.length-2?money(v):v)}</td>`).join('')+'</tr>').join('')||`<tr><td colspan="${exHeaders.length}">No published aggregate rows match these filters.</td></tr>`;document.getElementById('exStatus').innerHTML=`<b>${money(exResult.length)}</b> report rows from <b>${money(base.length)}</b> privacy-safe daily cells. Published dataset retains <b>${X.meta.published_value_coverage_pct.toFixed(2)}%</b> of eligible net value; ${money(X.meta.suppressed.groups)} remaining low-volume rollups were excluded.`}
+function exDownload(blob,name){const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),500)}
+function exFilename(ext){const mode=document.getElementById('exGroup').value,start=document.getElementById('exStart').value||'start',end=document.getElementById('exEnd').value||'end';return`Aptronix_Aggregate_${mode}_${start}_to_${end}.${ext}`}
+function exportCsv(){const lines=[exHeaders.map(csvCell).join(','),...exResult.map(r=>r.map(csvCell).join(','))];exDownload(new Blob(['\ufeff'+lines.join('\r\n')],{type:'text/csv;charset=utf-8'}),exFilename('csv'))}
+function exportJson(){const rows=exResult.map(r=>Object.fromEntries(exHeaders.map((h,i)=>[h,r[i]]))),payload={metadata:{...X.meta,active_report_layout:document.getElementById('exGroup').value,exported_rows:rows.length},rows};exDownload(new Blob([JSON.stringify(payload,null,2)],{type:'application/json'}),exFilename('json'))}
+function exportExcel(){const xmlEsc=v=>String(v??'').replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c])),sheet=[exHeaders,...exResult],body=sheet.map((r,ri)=>'<Row>'+r.map(v=>`<Cell><Data ss:Type="${!ri||typeof v!=='number'?'String':'Number'}">${xmlEsc(v)}</Data></Cell>`).join('')+'</Row>').join(''),xml=`<?xml version="1.0"?><Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet" xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"><Worksheet ss:Name="Aggregate Export"><Table>${body}</Table></Worksheet></Workbook>`;exDownload(new Blob([xml],{type:'application/vnd.ms-excel'}),exFilename('xml'))}
+document.getElementById('exApply').onclick=renderExport;document.getElementById('exReset').onclick=()=>{document.getElementById('exStart').value=X.meta.coverage_start;document.getElementById('exEnd').value=X.meta.coverage_end;['exCity','exStore','exChannel','exFamily'].forEach(id=>document.getElementById(id).value='all');document.getElementById('exGroup').value='detail';renderExport()};document.getElementById('exCsv').onclick=exportCsv;document.getElementById('exExcel').onclick=exportExcel;document.getElementById('exJson').onclick=exportJson;['exLimit','exGroup'].forEach(id=>document.getElementById(id).onchange=renderExport);
 
 renderOverviewChannels();renderOverview();renderHistory();fillExplorerStores();fillBehStores();fillExpStores();
 </script></body></html>
