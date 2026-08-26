@@ -4,11 +4,12 @@ This public dashboard contains aggregate data only. Customer names, customer cod
 
 ## Source and audit rules
 
-- Coverage: full calendar years 2024 and 2025.
+- Coverage: 25 Jun–31 Dec 2023 from the supplied `Jul-Dec'23.xlsx`, plus full calendar years 2024 and 2025. The 2023 source is partial-period history and is never presented as a full-year equivalent.
 - Cancelled transactions are excluded before all calculations.
 - Duplicate removal: exact equality across all 53 source columns. This intentionally avoids the earlier, over-broad transaction key that could remove valid multi-line sales.
 - Net customer-linked value: sum of `Total` after the exclusions above, including valid returns as negative value.
-- Cross-year identity: exact Customer Code only. Unmatched codes are not automatically called new customers or churned customers.
+- Cross-period identity: exact Customer Code only across the available 2023 period and full-year 2024/2025 sources. Unmatched codes are not automatically called new customers or churned customers.
+- Three-period cohorts are mutually exclusive: 2023 only, 2024 only, 2025 only, each two-period-only combination, and all three periods. Their sum must reconcile to the distinct-code union.
 
 ## Customer metrics
 
