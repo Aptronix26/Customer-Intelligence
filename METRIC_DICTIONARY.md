@@ -47,3 +47,17 @@ Each customer belongs to one channel using this priority: Warehouse → SMB → 
 - Net value: signed, additive source `Total` in INR, including returns.
 - CSV and JSON downloads are standards-based. The Excel download is SpreadsheetML XML, which opens directly in Microsoft Excel without embedding a third-party library.
 - Public exports contain no customer name, Customer Code, phone number, email address, or sales-executive identifier. Customer-level activation remains a separate private-tool requirement.
+
+## Premiumisation Intelligence
+
+- Scope: valid, de-duplicated, positive-quantity POS sales for the five core Apple device families across full calendar years 2022–2025. Sale returns are excluded because premiumisation is presented as a gross product-mix view, not net revenue.
+- Premium iPhone: Pro and Pro Max models.
+- Premium Mac: MacBook Pro, Mac Pro and Mac Studio.
+- Premium iPad: iPad Pro.
+- Premium Watch: Ultra, Hermès/Hermes and Edition.
+- Premium AirPods: AirPods Max.
+- Premium unit mix: premium-family POS units divided by all eligible core-device POS units.
+- Premium value mix: premium-family realised POS value divided by all eligible core-device realised POS value.
+- Premium realised ASP: premium-family realised POS value divided by premium-family units.
+- National Year × Channel × Product Family aggregates are complete for the eligible scope. City detail applies the 10-customer privacy rule: low-volume cities are combined, and any remaining unsafe aggregate is suppressed.
+- The model-based definition is intentionally stable across years. It does not infer premium status from a changing price threshold and should not be interpreted as margin or profitability.

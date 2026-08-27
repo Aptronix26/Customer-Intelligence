@@ -8,6 +8,17 @@
     "june_2023_overlap_rule": "Jan-Jun source authoritative through 30 Jun; prior history source used from 1 Jul",
     "matching_invoice_interactions_in_overlap_qa": 5727
   },
+  "premiumisation_meta": {
+    "coverage": "Full calendar years 2022 to 2025",
+    "definition": "Flagship model families: iPhone Pro/Pro Max; MacBook Pro/Mac Pro/Mac Studio; iPad Pro; Watch Ultra/Hermes/Edition; AirPods Max",
+    "2022_premium_unit_mix_pct": 15.18,
+    "2022_premium_value_mix_pct": 29.06,
+    "2025_premium_unit_mix_pct": 17.46,
+    "2025_premium_value_mix_pct": 33.77,
+    "city_detail_rows": 496,
+    "city_detail_value_coverage_pct": 91.9729,
+    "minimum_customer_threshold": 10
+  },
   "summary_meta": {
     "privacy_mode": "aggregate_only",
     "source_year": 2025,
