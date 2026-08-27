@@ -84,16 +84,25 @@ def product_family(business_unit: str, category: str, lob: str) -> str:
 
 
 def main(output: Path, source_args: list[str]) -> None:
-    if len(source_args) != 3:
-        raise SystemExit("usage: build_export_aggregate.py OUTPUT.js 2023.xlsx 2024.xlsx 2025.xlsx")
+    if len(source_args) != 6:
+        raise SystemExit("usage: build_export_aggregate.py OUTPUT.js 2022-H1 2022-H2 2023-H1 2023-H2 2024 2025")
     started = time.time()
     groups = {}
-    source_stats = {}
+    source_stats = defaultdict(lambda: defaultdict(float))
+    seen_rows_by_year = defaultdict(set)
+    specs = (
+        (2022, source_args[0], "2022-01-01", "2022-06-30"),
+        (2022, source_args[1], "2022-07-01", "2022-12-31"),
+        (2023, source_args[2], "2023-01-01", "2023-06-30"),
+        (2023, source_args[3], "2023-07-01", "2023-12-31"),
+        (2024, source_args[4], "2024-01-01", "2024-12-31"),
+        (2025, source_args[5], "2025-01-01", "2025-12-31"),
+    )
 
-    for year, source_arg in zip((2023, 2024, 2025), source_args):
+    for year, source_arg, start_date, end_date in specs:
         source = Path(source_arg)
-        seen_rows: set[bytes] = set()
-        stats = defaultdict(float)
+        seen_rows = seen_rows_by_year[year]
+        stats = source_stats[str(year)]
         with ZipFile(source) as book:
             strings = load_strings(book)
             sheets = sorted(name for name in book.namelist() if SHEET_RE.fullmatch(name))
@@ -134,6 +143,9 @@ def main(output: Path, source_args: list[str]) -> None:
                         seen_rows.add(digest)
                         code = str(resolve(cells.get("J", (None, "")), strings)).strip()
                         date = iso_date(str(resolve(cells.get("D", (None, "")), strings)).strip())
+                        if not date or date < start_date or date > end_date:
+                            stats["rows_outside_authoritative_period"] += 1
+                            continue
                         if not code or not date:
                             stats["unlinked_or_undated_rows"] += 1
                             continue
@@ -168,7 +180,10 @@ def main(output: Path, source_args: list[str]) -> None:
                         stats["eligible_value"] += value
                         if int(stats["raw_rows"]) % 100_000 == 0:
                             print(f"{year}: processed {int(stats['raw_rows']):,} rows; groups={len(groups):,}", flush=True)
-        source_stats[str(year)] = {k: round(v, 2) for k, v in stats.items()}
+    source_stats = {
+        year: {key: round(value, 2) for key, value in stats.items()}
+        for year, stats in source_stats.items()
+    }
 
     rows = []
     suppressed = {"groups": 0, "lines": 0, "units": 0.0, "value": 0.0}
@@ -236,7 +251,7 @@ def main(output: Path, source_args: list[str]) -> None:
             "grain": "date × city × store × channel × product family, with privacy rollups from store to city to national level",
             "currency": "INR",
             "timezone": "Asia/Kolkata",
-            "generated_on": "2026-08-26",
+            "generated_on": "2026-08-27",
             "source_files": [Path(path).name for path in source_args],
             "source_stats": source_stats,
             "published": {k: round(v, 2) for k, v in published.items()},

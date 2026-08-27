@@ -26,14 +26,18 @@ for (const channel of summary.channels) {
   assert(close(stores.reduce((n, x) => n + x.value, 0), summary.channel_metrics[channel].value), `${channel}: store value totals do not reconcile`);
 }
 const cross = history.cross_period;
-assert(history[2023].min_date_text === '25-06-2023' && history[2023].max_date_text === '31-12-2023', '2023 partial-period coverage is incorrect');
-assert(history[2023].identifiable_customer_codes === 156584, '2023 customer total is incorrect');
-assert(cross.distinct_codes === 686211, 'Three-period distinct-code total is incorrect');
-assert(cross.exact_code_overlap_all_three === 6227, 'All-three-period overlap is incorrect');
-assert(cross.overlap_2023_2024 === 20578, '2023→2024 overlap is incorrect');
+assert(history[2022].min_date_text === '01-01-2022' && history[2022].max_date_text === '31-12-2022', '2022 coverage is incorrect');
+assert(history[2023].min_date_text === '01-01-2023' && history[2023].max_date_text === '31-12-2023', '2023 coverage is incorrect');
+assert(history[2022].identifiable_customer_codes === 273416, '2022 customer total is incorrect');
+assert(history[2023].identifiable_customer_codes === 283695, '2023 customer total is incorrect');
+assert(cross.distinct_codes === 1004604, 'Four-year distinct-code total is incorrect');
+assert(cross.exact_code_overlap_all_four === 3856, 'All-four-year overlap is incorrect');
+assert(cross.overlap_2022_2023 === 34947, '2022→2023 overlap is incorrect');
+assert(cross.overlap_2023_2024 === 32454, '2023→2024 overlap is incorrect');
 assert(cross.overlap_2024_2025 === 34235, '2024→2025 overlap is incorrect');
-const cohortTotal = ['2023_only','2024_only','2025_only','2023_2024_only','2023_2025_only','2024_2025_only','exact_code_overlap_all_three'].reduce((n, key) => n + cross[key], 0);
-assert(cohortTotal === cross.distinct_codes, 'Three-period customer-code cohorts do not reconcile');
+const cohortTotal = Object.values(cross.cohorts_by_year_presence).reduce((n, value) => n + value, 0);
+assert(cohortTotal === cross.distinct_codes && cross.cohort_total === cross.distinct_codes, 'Four-year customer-code cohorts do not reconcile');
+assert(history.overlap_qa.matching_invoice_interactions === 5727, 'June 2023 overlap reconciliation changed');
 assert(Array.isArray(behavior) && behavior.length === 4707, 'Behavior dataset is incomplete');
 const behaviorMrp = behavior.reduce((n, row) => n + row.mrp, 0);
 const behaviorSales = behavior.reduce((n, row) => n + row.sales, 0);
@@ -49,7 +53,7 @@ assert(exportData.columns.join('|') === 'date|city|store|channel|product_family|
 assert(exportData.rows.length > 0, 'Export dataset is empty');
 for (const row of exportData.rows) {
   assert(row.length === exportData.columns.length, 'Export row does not match schema');
-  assert(/^20(23|24|25)-\d{2}-\d{2}$/.test(row[0]), `Export row has invalid date: ${row[0]}`);
+  assert(/^20(22|23|24|25)-\d{2}-\d{2}$/.test(row[0]), `Export row has invalid date: ${row[0]}`);
   assert(row[7] >= exportData.meta.minimum_customer_threshold, 'Low-customer export cell escaped suppression');
   assert(row[5] >= 0 && row[6] >= 0 && row[7] >= 0, 'Export row has an invalid interaction count');
 }
@@ -65,11 +69,11 @@ assert(!/CUS[-_ ]?\d{4,}|Custt_/i.test(publicAssets), 'Possible customer identif
 assert(!/Customer Explorer|Marketing Export/.test(html.match(/<div class="nav">[\s\S]*?<\/div>/)?.[0] || ''), 'Customer-level navigation remains public');
 assert(html.includes('Public aggregate-only build'), 'Public privacy statement is missing');
 assert(html.includes('Data Export Centre') && html.includes('fewer than <b>10 identifiable customers</b>'), 'Public export navigation or privacy rule is missing');
-assert(html.includes('25 Jun 2023–31 Dec 2025') && html.includes('2023 partial period'), 'Partial-period source coverage is not visible');
-assert(html.includes('Published 26 Aug 2026'), 'Dashboard publication date is missing');
+assert(html.includes('1 Jan 2022–31 Dec 2025') && html.includes('4 full calendar years'), 'Four-year source coverage is not visible');
+assert(html.includes('Published 27 Aug 2026'), 'Dashboard publication date is missing');
 for (const label of ['Daily MTD','Weekly','QTD','YoY','Trajectory','Customer']) assert(html.includes(`>${label}</a>`), `${label} suite navigation link is missing`);
 assert(html.indexOf('.mobileNav{display:none}') < html.indexOf('@media(max-width:800px)'), 'Mobile navigation base rule overrides its responsive rule');
-assert(!/34,237|244,922|281,520|1,384\.32|22,904|Two-Year Customer Intelligence|2024–2025 LIFEGRAPH/.test(html), 'Stale legacy audit labels or totals remain in the dashboard');
+assert(!/Two-Year Customer Intelligence|Three-Period Customer Intelligence|2024–2025 LIFEGRAPH/.test(html), 'Stale legacy audit labels remain in the dashboard');
 for (const path of ['data/summary.js', 'data/behavior.js', 'data/history_summary.js', 'data/export_aggregate.js']) assert(fs.existsSync(path), `${path} is missing`);
 
 console.log(`Validation passed: ${summary.meta.customer_codes.toLocaleString('en-IN')} customers, ${behavior.length.toLocaleString('en-IN')} behavior groups, ${exportData.rows.length.toLocaleString('en-IN')} privacy-safe export cells.`);

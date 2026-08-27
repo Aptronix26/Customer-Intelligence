@@ -1,5 +1,13 @@
 {
   "privacy": "No customer names, codes, phone numbers or email addresses are written to public assets.",
+  "history_meta": {
+    "coverage": "01 Jan 2022 to 31 Dec 2025",
+    "full_calendar_years": [2022, 2023, 2024, 2025],
+    "distinct_customer_codes_across_history": 1004604,
+    "exact_code_overlap_all_four_years": 3856,
+    "june_2023_overlap_rule": "Jan-Jun source authoritative through 30 Jun; prior history source used from 1 Jul",
+    "matching_invoice_interactions_in_overlap_qa": 5727
+  },
   "summary_meta": {
     "privacy_mode": "aggregate_only",
     "source_year": 2025,
