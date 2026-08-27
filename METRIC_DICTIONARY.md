@@ -50,14 +50,11 @@ Each customer belongs to one channel using this priority: Warehouse → SMB → 
 
 ## Premiumisation Intelligence
 
-- Scope: valid, de-duplicated, positive-quantity POS sales for the five core Apple device families across full calendar years 2022–2025. Sale returns are excluded because premiumisation is presented as a gross product-mix view, not net revenue.
-- Premium iPhone: Pro and Pro Max models.
-- Premium Mac: MacBook Pro, Mac Pro and Mac Studio.
-- Premium iPad: iPad Pro.
-- Premium Watch: Ultra, Hermès/Hermes and Edition.
-- Premium AirPods: AirPods Max.
-- Premium unit mix: premium-family POS units divided by all eligible core-device POS units.
-- Premium value mix: premium-family realised POS value divided by all eligible core-device realised POS value.
-- Premium realised ASP: premium-family realised POS value divided by premium-family units.
-- National Year × Channel × Product Family aggregates are complete for the eligible scope. City detail applies the 10-customer privacy rule: low-volume cities are combined, and any remaining unsafe aggregate is suppressed.
-- The model-based definition is intentionally stable across years. It does not infer premium status from a changing price threshold and should not be interpreted as margin or profitability.
+- Scope: valid, de-duplicated, positive-quantity and positive-value POS sales for observed models in the five core Apple device families across full calendar years 2022–2025. Returns and zero/negative rows are excluded because this is a gross product-mix view, not net revenue.
+- Report grain: Year × Store/Selling Point × Channel × Product Family × Observed Model × Model Segment. The public dashboard also carries privacy-safe national rollups for an all-stores view.
+- iPhone models remain distinct: Pro and Pro Max are never combined. The consumer hero follows launch year: iPhone 14 (2022), iPhone 15 (2023), iPhone 16 (2024), and iPhone 17 (2025).
+- For Mac, iPad, Watch and AirPods, the consumer hero is the highest-unit observed non-premium model in that family and calendar year.
+- Premium iPhone: Pro and Pro Max models. Premium Mac: MacBook Pro, Mac Pro and Mac Studio. Premium iPad: iPad Pro. Premium Watch: Ultra, Hermès/Hermes and Edition. Premium AirPods: AirPods Max.
+- Unit mix: selected-model units divided by all published units in the active filter scope. Value mix: selected-model realised value divided by all published realised value in the active filter scope. Realised ASP: selected-model realised value divided by selected-model units.
+- Store/model cells require at least 10 identifiable customers. Low-volume models are combined into an aggregate model bucket where safe; remaining unsafe activity is suppressed. The published store/model rows retain 93.5615% of eligible realised value.
+- The model-based definition does not infer premium status from a changing price threshold and should not be interpreted as margin or profitability. CSV, Excel-compatible XML and JSON downloads reproduce the active filters.

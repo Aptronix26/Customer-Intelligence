@@ -10,13 +10,21 @@
   },
   "premiumisation_meta": {
     "coverage": "Full calendar years 2022 to 2025",
-    "definition": "Flagship model families: iPhone Pro/Pro Max; MacBook Pro/Mac Pro/Mac Studio; iPad Pro; Watch Ultra/Hermes/Edition; AirPods Max",
-    "2022_premium_unit_mix_pct": 15.18,
-    "2022_premium_value_mix_pct": 29.06,
-    "2025_premium_unit_mix_pct": 17.46,
-    "2025_premium_value_mix_pct": 33.77,
-    "city_detail_rows": 496,
-    "city_detail_value_coverage_pct": 91.9729,
+    "definition": "Observed model segregation with year-specific consumer heroes and flagship models: iPhone Pro/Pro Max; MacBook Pro/Mac Pro/Mac Studio; iPad Pro; Watch Ultra/Hermes/Edition; AirPods Max",
+    "iphone_consumer_hero_by_year": {
+      "2022": "iPhone 14",
+      "2023": "iPhone 15",
+      "2024": "iPhone 16",
+      "2025": "iPhone 17"
+    },
+    "2022_published_premium_unit_mix_pct": 15.02,
+    "2022_published_premium_value_mix_pct": 29.03,
+    "2025_published_premium_unit_mix_pct": 17.42,
+    "2025_published_premium_value_mix_pct": 33.68,
+    "national_model_rows": 278,
+    "store_model_rows": 7290,
+    "store_model_value_coverage_pct": 93.5615,
+    "zero_or_negative_published_rows": 0,
     "minimum_customer_threshold": 10
   },
   "summary_meta": {
