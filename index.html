@@ -97,14 +97,15 @@ h1{font-size:23px;line-height:1.08;margin-top:4px}
 }
 .lgLoading{padding:22px;text-align:center;color:var(--muted);font-size:11px}.lgError{padding:16px;border:1px solid #e0b7aa;background:#fff4ef;color:#7c3c2b;border-radius:12px;font-size:10px}
 </style>
+<link rel="stylesheet" href="lifecycle-view.css?v=20260901-1">
 </head>
 <body><div class="app">
 <aside><div class="brand">Customer Intelligence<small>Aptronix • Verified aggregate build</small></div>
-<div class="nav"><button class="active" data-view="overview"><span>Business Overview</span></button><button data-view="behaviour"><span>Customer Choice Intelligence</span></button><button data-view="premium"><span>Premiumisation Intelligence</span></button><button data-view="history"><span>LifeGraph Intelligence</span></button><button data-view="export"><span>Data Export Centre</span></button></div>
+<div class="nav"><button class="active" data-view="overview"><span>Business Overview</span></button><button data-view="lifecycle"><span>Customer Lifecycle</span></button><button data-view="behaviour"><span>Customer Choice Intelligence</span></button><button data-view="premium"><span>Premiumisation Intelligence</span></button><button data-view="history"><span>LifeGraph Intelligence</span></button><button data-view="export"><span>Data Export Centre</span></button></div>
 <div class="privacy">Public aggregate-only build. No customer names, customer codes or contact details are included.</div></aside>
 <main><div class="top"><div id="crumb">Business Overview</div><div class="pill">AUDITED 2022–2025 LIFEGRAPH</div></div>
 <div class="suitebar" aria-label="Dashboard data confidence and navigation">
-  <div class="suiteMeta"><strong>DATA CONFIDENCE</strong><span><b>Customer Intelligence</b></span><span>1 Jan 2022–31 Dec 2025</span><span>4 full calendar years</span><span class="pass">Validation passed</span><span>Published 27 Aug 2026</span><span>Aggregate-only public build</span></div>
+  <div class="suiteMeta"><strong>DATA CONFIDENCE</strong><span><b>Customer Intelligence</b></span><span>1 Jan 2022–31 Dec 2025</span><span>4 full calendar years</span><span class="pass">Validation passed</span><span>Published 1 Sep 2026</span><span>Aggregate-only public build</span></div>
   <nav class="suiteLinks" aria-label="Intelligence dashboards">
     <a href="https://aptronix26.github.io/Retail-Sales-MTD/">Daily MTD</a>
     <a href="https://aptronix26.github.io/Boardroom-JAS-Weekly/">Weekly</a>
@@ -115,7 +116,7 @@ h1{font-size:23px;line-height:1.08;margin-top:4px}
   </nav>
 </div>
 <div class="mobileNav" id="mobileNav">
-  <button class="active" data-view="overview">Overview</button>
+  <button class="active" data-view="overview">Overview</button><button data-view="lifecycle">Lifecycle</button>
   <button data-view="behaviour">Choice Intelligence</button>
   <button data-view="premium">Premiumisation</button>
   <button data-view="history">LifeGraph 2022–25</button>
@@ -127,6 +128,14 @@ h1{font-size:23px;line-height:1.08;margin-top:4px}
 <section class="view" id="explorer">
 <div class="hero"><div class="eyebrow">Customer 360</div><h1>Customer Explorer</h1><p>Search the full identifiable customer population or select a store. Each customer card now explains <b>what we know, what it means, why the customer may be worth reviewing now, and the most sensible next conversation</b>. Customer name comes from posted sales; mobile and email are not present in this source and are therefore not invented.</p></div>
 <div class="explorer"><div class="card queue"><div class="filters"><input id="search" placeholder="Search customer name or code"><select id="channelFilter"></select><select id="storeFilter"></select><div class="two"><select id="typeFilter"><option value="all">All customers</option><option value="repeat">Repeat customers</option><option value="multi">Multi-category customers</option><option value="high">Customers worth reviewing</option><option value="one">One-bill customers</option></select><select id="sortFilter"><option value="priority">Sort: Review relevance</option><option value="value">Sort: Value</option><option value="name">Sort: Name</option></select></div><div class="qmeta" id="qstats"></div></div><div class="qlist" id="list"></div></div><div class="card profile"><div id="profile"></div></div></div>
+</section>
+
+<section class="view" id="lifecycle">
+<div class="hero"><div class="eyebrow">Customer Lifecycle Intelligence</div><h1>From First Purchase to Ecosystem Opportunity</h1><p>Explore privacy-safe customer cohorts by channel, first-purchase store, first year and first observed LOB. See how the relationship expanded, which core categories are visible through the latest history, and which LOB is the strongest next-conversation pool.</p></div>
+<div class="card"><div class="lcFilters"><label>Channel<select id="lcChannel"></select></label><label>First-purchase store<select id="lcStore"></select></label><label>First-purchase year<select id="lcYear"></select></label><label>First observed LOB<select id="lcFirst"></select></label></div><div class="exportActions"><button class="secondary" id="lcReset">Reset lifecycle filters</button></div><div class="exportStatus" id="lcStatus"></div></div>
+<div class="kpis" id="lcKpis" style="margin-top:12px"></div><div class="heroFinding" id="lcFinding"></div><div class="lcJourney" id="lcJourney"></div>
+<div class="card" style="margin-top:12px"><h2>Lifecycle path detail</h2><div class="desc">Largest privacy-safe lifecycle cohorts in the selected scope. “Bought” means a positive core-product sale is visible under the same Customer Code in the available 2022–2025 history.</div><div class="lcPathWrap" id="lcPaths"></div></div>
+<div class="lcMethod"><b>Privacy and interpretation:</b> This public view contains no names, contact details or customer codes. It publishes cohorts only, with a minimum 10-customer threshold and aggregation for smaller store cells. “First purchase” means the first observed positive core-LOB transaction in the available Aptronix history; “not yet visible” is an opportunity signal, not proof of non-ownership or purchase intent.</div>
 </section>
 
 <section class="view" id="behaviour">
@@ -285,7 +294,7 @@ h1{font-size:23px;line-height:1.08;margin-top:4px}
 
 
 </div></main></div>
-<script src="data/summary.js?v=20260825-1"></script><script src="data/behavior.js?v=20260825-1"></script><script src="data/history_summary.js?v=20260827-1"></script><script src="data/premium_model_summary.js?v=20260827-2"></script><script src="data/export_aggregate.js?v=20260827-1"></script>
+<script src="data/summary.js?v=20260825-1"></script><script src="data/lifecycle_summary.js?v=20260901-1"></script><script src="data/behavior.js?v=20260825-1"></script><script src="data/history_summary.js?v=20260827-1"></script><script src="data/premium_model_summary.js?v=20260827-2"></script><script src="data/export_aggregate.js?v=20260827-1"></script>
 <script>
 const S=window.LG_SUMMARY,B=window.LG_BEHAVIOR||[],H=window.LG_HISTORY,PM=window.LG_PREMIUM_MODELS,X=window.LG_EXPORT,CHANNELS=S.channels,CORE=['iPhone','Mac','iPad','Watch','AirPods'];
 const money=n=>new Intl.NumberFormat('en-IN',{maximumFractionDigits:0}).format(n||0);
@@ -316,7 +325,7 @@ function rowObj(z){const p={code:z[0],name:z[1],first:z[2],first_location:z[3],l
 function reasonsFor(p){const a=[];if(p.repeat)a.push('Has purchased on more than one bill');if(p.eco_depth>=2)a.push(`Has bought across ${p.eco_depth} core Apple categories`);if(p.net>=150000)a.push('High total purchase value');else if(p.net>=75000)a.push('Meaningful total purchase value');if(p.first&&p.last&&p.first!==p.last)a.push('Established relationship over time');if(p.core_units>0)a.push('Device purchase history is identifiable');if(p.ecosystem.includes('iPhone')&&!p.ecosystem.includes('Watch'))a.push('Owns iPhone but no Watch purchase is visible');return a.slice(0,5)}
 function actionFor(p){const n=p.next_category;if(n==='Lifecycle Review')return 'Review device age and future upgrade timing before contacting the customer.';return p.repeat?`Use the existing relationship to explore whether ${n} is relevant to the customer.`:`Reconnect after the first purchase and explore whether ${n} can add value.`}
 function purchaseRelationship(p){return{fd:p.first||'Not available',fl:p.first_location||'Location unavailable',ld:p.last||'Not available',ll:p.last_location||'Location unavailable'}}
-function switchView(view,label){const target=document.getElementById(view);if(!target){console.error('Missing view:',view);return;}document.querySelectorAll('.view').forEach(x=>x.classList.remove('active'));target.classList.add('active');document.querySelectorAll('.nav button,.mobileNav button').forEach(x=>x.classList.toggle('active',x.dataset.view===view));document.getElementById('crumb').textContent=label||view;if(view==='explorer')initExplorer();if(view==='behaviour')renderBehaviour();if(view==='premium')initPremium();if(view==='marketing')initMarketing();if(view==='export')initExport();window.scrollTo({top:0,behavior:'smooth'})}
+function switchView(view,label){const target=document.getElementById(view);if(!target){console.error('Missing view:',view);return;}document.querySelectorAll('.view').forEach(x=>x.classList.remove('active'));target.classList.add('active');document.querySelectorAll('.nav button,.mobileNav button').forEach(x=>x.classList.toggle('active',x.dataset.view===view));document.getElementById('crumb').textContent=label||view;if(view==='explorer')initExplorer();if(view==='lifecycle')initLifecycle();if(view==='behaviour')renderBehaviour();if(view==='premium')initPremium();if(view==='marketing')initMarketing();if(view==='export')initExport();window.scrollTo({top:0,behavior:'smooth'})}
 document.querySelectorAll('.nav button,.mobileNav button').forEach(b=>b.onclick=()=>switchView(b.dataset.view,b.textContent.trim()));
 
 // Overview
@@ -373,4 +382,5 @@ function exportExcel(){const xmlEsc=v=>String(v??'').replace(/[&<>]/g,c=>({'&':'
 document.getElementById('exApply').onclick=renderExport;document.getElementById('exReset').onclick=()=>{document.getElementById('exStart').value=X.meta.coverage_start;document.getElementById('exEnd').value=X.meta.coverage_end;['exCity','exStore','exChannel','exFamily'].forEach(id=>document.getElementById(id).value='all');document.getElementById('exGroup').value='detail';renderExport()};document.getElementById('exCsv').onclick=exportCsv;document.getElementById('exExcel').onclick=exportExcel;document.getElementById('exJson').onclick=exportJson;['exLimit','exGroup'].forEach(id=>document.getElementById(id).onchange=renderExport);
 
 renderOverviewChannels();renderOverview();renderHistory();fillExplorerStores();fillBehStores();fillExpStores();
-</script></body></html>
+</script><script src="lifecycle-view.js?v=20260901-1"></script>
+</body></html>

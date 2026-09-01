@@ -15,8 +15,9 @@ const behavior = load('data/behavior.js', 'LG_BEHAVIOR');
 const history = load('data/history_summary.js', 'LG_HISTORY');
 const premium = load('data/premium_model_summary.js', 'LG_PREMIUM_MODELS');
 const exportData = load('data/export_aggregate.js', 'LG_EXPORT');
+const lifecycle = load('data/lifecycle_summary.js', 'LG_LIFECYCLE');
 const html = read('index.html');
-const publicAssets = [read('data/summary.js'), read('data/behavior.js'), read('data/history_summary.js'), read('data/premium_model_summary.js'), read('data/export_aggregate.js')].join('\n');
+const publicAssets = [read('data/summary.js'), read('data/behavior.js'), read('data/history_summary.js'), read('data/premium_model_summary.js'), read('data/export_aggregate.js'), read('data/lifecycle_summary.js')].join('\n');
 
 assert(summary.meta.privacy_mode === 'aggregate_only', 'Summary is not marked aggregate-only');
 assert(summary.meta.customer_codes === 315757, '2025 customer total does not match audited source');
@@ -87,18 +88,32 @@ assert(exportLines === exportData.meta.published.lines, 'Published export lines 
 assert(close(exportUnits, exportData.meta.published.units, 0.02), 'Published export units do not reconcile');
 assert(close(exportValue, exportData.meta.published.value, 0.02), 'Published export value does not reconcile');
 assert(exportData.meta.published_value_coverage_pct > 0 && exportData.meta.published_value_coverage_pct <= 100, 'Export value coverage is invalid');
+assert(lifecycle.meta.privacy_mode === 'aggregate_only', 'Lifecycle dataset is not marked aggregate-only');
+assert(lifecycle.meta.minimum_customer_threshold === 10, 'Lifecycle privacy threshold is not 10 customers');
+assert(lifecycle.meta.coverage_start === '2022-01-01' && lifecycle.meta.coverage_end === '2025-12-31', 'Lifecycle coverage is incorrect');
+assert(lifecycle.meta.core_lobs.join('|') === 'iPhone|Mac|iPad|Watch|AirPods', 'Lifecycle LOB model changed unexpectedly');
+assert(lifecycle.national_rows.length > 0 && lifecycle.store_rows.length > 0, 'Lifecycle aggregates are empty');
+for (const row of [...lifecycle.national_rows, ...lifecycle.store_rows]) {
+  assert(row.length === 10, 'Lifecycle row does not match schema');
+  assert(row[5] >= lifecycle.meta.minimum_customer_threshold, 'Low-customer lifecycle cell escaped privacy aggregation');
+  assert(row[4] > 0 && row[4] < 32, 'Lifecycle row has an invalid ecosystem mask');
+  assert(row[6] >= 0 && row[6] <= row[5], 'Lifecycle repeat count is invalid');
+  assert(row[8] >= lifecycle.meta.coverage_start && row[9] <= lifecycle.meta.coverage_end, 'Lifecycle date is outside coverage');
+}
+assert(lifecycle.national_rows.reduce((n,row)=>n+row[5],0) <= lifecycle.meta.eligible_lifecycle_customers, 'Published lifecycle cohorts exceed eligible customers');
 assert(!exportData.columns.some(name => /customer_(name|code)|phone|email|executive/i.test(name)), 'Identifying field exists in export schema');
 assert(!/CUS[-_ ]?\d{4,}|Custt_/i.test(publicAssets), 'Possible customer identifier found in public aggregate assets');
 assert(!/Customer Explorer|Marketing Export/.test(html.match(/<div class="nav">[\s\S]*?<\/div>/)?.[0] || ''), 'Customer-level navigation remains public');
 assert(html.includes('Public aggregate-only build'), 'Public privacy statement is missing');
 assert(html.includes('Data Export Centre') && html.includes('fewer than <b>10 identifiable customers</b>'), 'Public export navigation or privacy rule is missing');
 assert(html.includes('Premiumisation Intelligence') && html.includes('iPhone Pro and Pro Max') && html.includes('id="prStore"'), 'Premiumisation store/model navigation or definition is missing');
+assert(html.includes('Customer Lifecycle') && html.includes('id="lcStore"') && html.includes('id="lcFirst"'), 'Customer Lifecycle navigation or filters are missing');
 assert(!html.includes('id="prCity"') && html.includes('id="prCsv"') && html.includes('id="prExcel"') && html.includes('id="prJson"'), 'Premiumisation dynamic report controls are incomplete');
 assert(html.includes('1 Jan 2022–31 Dec 2025') && html.includes('4 full calendar years'), 'Four-year source coverage is not visible');
-assert(html.includes('Published 27 Aug 2026'), 'Dashboard publication date is missing');
+assert(html.includes('Published 1 Sep 2026'), 'Dashboard publication date is missing');
 for (const label of ['Daily MTD','Weekly','QTD','YoY','Trajectory','Customer']) assert(html.includes(`>${label}</a>`), `${label} suite navigation link is missing`);
 assert(html.indexOf('.mobileNav{display:none}') < html.indexOf('@media(max-width:800px)'), 'Mobile navigation base rule overrides its responsive rule');
 assert(!/Two-Year Customer Intelligence|Three-Period Customer Intelligence|2024–2025 LIFEGRAPH/.test(html), 'Stale legacy audit labels remain in the dashboard');
-for (const path of ['data/summary.js', 'data/behavior.js', 'data/history_summary.js', 'data/premium_model_summary.js', 'data/export_aggregate.js']) assert(fs.existsSync(path), `${path} is missing`);
+for (const path of ['data/summary.js', 'data/behavior.js', 'data/history_summary.js', 'data/premium_model_summary.js', 'data/export_aggregate.js', 'data/lifecycle_summary.js']) assert(fs.existsSync(path), `${path} is missing`);
 
 console.log(`Validation passed: ${summary.meta.customer_codes.toLocaleString('en-IN')} customers, ${behavior.length.toLocaleString('en-IN')} behavior groups, ${exportData.rows.length.toLocaleString('en-IN')} privacy-safe export cells.`);
