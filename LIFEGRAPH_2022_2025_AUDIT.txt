@@ -1,0 +1,5 @@
+Aptronix Customer Intelligence — LifeGraph 2022–2025
+
+2022 and 2023 half-year source files were audited and combined at calendar-year level. Cancelled rows were excluded and duplicate valid transaction-line signatures were removed before year summaries. Cross-year continuity uses exact Customer Code only. Different codes are not merged without contact/stable identity fields.
+
+The operating 2025 Customer Explorer / Customer Choice / Marketing Export modules remain unchanged; the historical enhancement is additive to LifeGraph Intelligence.

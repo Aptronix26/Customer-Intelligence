@@ -1,0 +1,11 @@
+LifeGraph Intelligence refinement:
+- History page changed from audit-heavy view to business/customer intelligence.
+- Cross-year figures used:
+  2024 audited Customer Codes: 279,159
+  2025 audited Customer Codes: 315,757
+  Exact overlap: 34,237
+  Combined distinct codes: 560,679
+  2024-only codes: 244,922
+  2025 first-seen-by-code: 281,520
+  Exact-match normalized-name consistency: 34,233 / 34,237 (~99.99%)
+- Different Customer Codes remain unmerged until stable contact identity is available.
