@@ -1,0 +1,1 @@
+window.__LG_PAYLOAD=[["S-101","Aptronix Business Solutions Private Limited","02 Jan 2025","Corporate TS","30 Dec 2025","Corporate TS",23,2783958.59,["iPhone","Mac","iPad","AirPods"],4,true,"Corporate TS","Hyderabad","Corporate",82,"Watch","Corporate",24.0,46.0]];if(window.__LG_RESOLVE)window.__LG_RESOLVE();

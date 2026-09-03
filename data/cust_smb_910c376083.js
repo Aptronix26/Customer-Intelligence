@@ -1,0 +1,1 @@
+window.__LG_PAYLOAD=[["CUS-1296426","Mahi","25 Jul 2025","SMB--TS","25 Jul 2025","SMB--TS",1,68600.0,["iPhone"],1,false,"SMB--TS","Hyderabad","Online Executive",7,"Watch","SMB",1.0,1.0]];if(window.__LG_RESOLVE)window.__LG_RESOLVE();
